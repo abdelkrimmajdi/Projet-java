@@ -15,7 +15,7 @@
          <children>
             <ImageView fx:id="imglogo" fitHeight="306.0" fitWidth="355.0" layoutX="79.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Downloads/378260886_298203846242065_4872939089175261193_n%20(1).jpg" />
+                  <Image url="@../../../../images/logo.jpg" />
                </image></ImageView>
          </children>
       </AnchorPane>
