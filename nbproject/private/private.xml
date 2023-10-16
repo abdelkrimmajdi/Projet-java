@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/SignUpController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/IService.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/tools/DataSource.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/signInController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/serviceUser.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/entities/utilisateur.java</file>
         </group>
     </open-files>
 </project-private>
