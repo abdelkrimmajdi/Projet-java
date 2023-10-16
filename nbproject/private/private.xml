@@ -3,11 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/SignUpController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/IService.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/tools/DataSource.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/signInController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/serviceUser.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/entities/utilisateur.java</file>
+=======
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/entities/Match.java</file>
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/services/ServiceMatch.java</file>
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/services/ServiceTournoi.java</file>
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/entities/Tournoi.java</file>
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/entities/equipe.java</file>
+>>>>>>> 8773f98302fc9bcda6c795b4b748ad89ed1c8587
         </group>
     </open-files>
 </project-private>
