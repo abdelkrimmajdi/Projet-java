@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import edu.esprit.pi.tools. DataSource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 ;
@@ -23,32 +24,42 @@ public ServiceReclamation(){
     this.cnx= DataSource.getInstance().getConnection();
 }
 
-     @Override
-    public void ajouter(Reclamation t) {
-        try {
-          String numero = String.valueOf(t.getNum());
-        if (numero.matches("^[259]\\d{7}$")) {
-            String req = "INSERT INTO reclamation (prenom, nom, num, email, type, description) VALUES ('"
-                    + t.getPrenom() + "', '" + t.getNom() + "', " + t.getNum() + ", '" + t.getEmail() + "', '" + t.getType()
-                    + "', '" + t.getDescription() + "')";
 
-            Statement stm = cnx.createStatement();
-            stm.executeUpdate(req);
-            System.out.println("Donnée ajoutée avec succès !");
-        } else {
-            System.out.println("Le numéro doit commencer par 2, 5 ou 9 et contenir exactement 8 chiffres.");
-        }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+
+    @Override
+  public void ajouter(Reclamation t) {
+try {
+    String selectQuery = "SELECT num, email, id_utilisateur FROM user WHERE cin = ?";
+    PreparedStatement selectStmt = cnx.prepareStatement(selectQuery);
+    selectStmt.setString(1, t.getCin());
+
+    ResultSet resultSet = selectStmt.executeQuery();
+
+    if (resultSet.next()) {
+         // Il y a une correspondance dans la table "user", vous pouvez maintenant effectuer l'insertion.
+        String insertQuery = "INSERT INTO recl (numero, email, id_utilisateur, type, description, etat) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
+        insertStmt.setInt(1, resultSet.getInt("num"));
+        insertStmt.setString(2, resultSet.getString("email"));
+        insertStmt.setInt(3, resultSet.getInt("id_utilisateur"));
+        insertStmt.setString(4, t.getType());
+        insertStmt.setString(5, t.getDescription());
+        insertStmt.setString(6, "en attente");
+        insertStmt.executeUpdate();
+        System.out.println("Donnée ajoutée avec succès!");
+    } else {
+        System.out.println("Cin n'est pas trouvée");
     }
+} catch (SQLException ex) {
+    System.out.println(ex.getMessage());
+}
+}
 
-@Override
-    public void modifier(Reclamation t) {
+    @Override
+  public void modifier(Reclamation t) {
     try {
-        String req = "UPDATE 'reclamation' SET prenom='" + t.getPrenom() + "', nom='" + t.getNom() + "', num='" + t.getNum() +
-                     "', email='" + t.getEmail() + "', type='" + t.getType() + "', description='" + t.getDescription() +
-                     "' WHERE id_reclamation =" + t.getId_reclamation();
+        String req = "UPDATE recl SET type='" + t.getType() + "', description='" + t.getDescription() + "' WHERE id_reclamation = " + t.getId_reclamation();
         Statement stm = cnx.createStatement();
         stm.executeUpdate(req);
         System.out.println("Donnée modifiée avec succès !");
@@ -57,51 +68,45 @@ public ServiceReclamation(){
     }
 }
     @Override
-    public void supprimer(int id) {
-      
+  
+       public void supprimer(int id) {
     try {
-        String req = "DELETE from  reclamation  WHERE id_reclamation =" + id;
-        Statement stm = cnx.createStatement();
+        String req = "DELETE FROM recl WHERE id_reclamation="+ id;
+          Statement stm = cnx.createStatement();
         stm.executeUpdate(req);
-        System.out.println("Donnée supprimer  avec succès !");
+        System.out.println("Réclamation supprimée avec succès !");
     } catch (SQLException ex) {
-        System.out.println("Erreur lors de la suppression des données : " + ex.getMessage());
-    }  
+        System.out.println("Erreur lors de la suppression de la réclamation : " + ex.getMessage());
+    }
 }
     
 
     @Override
-    public Reclamation getOne(int id) {
-      try {
-        String req = "SELECT * FROM reclamation WHERE id_reclamation = " + id;
+public Reclamation getOne(int id) {
+    try {
+        String req = "SELECT * FROM recl WHERE id_reclamation = " + id;
         Statement stm = cnx.createStatement();
         ResultSet rs = stm.executeQuery(req);
-
         if (rs.next()) {
             Reclamation r = new Reclamation();
-            r.setId_reclamation(rs.getInt("id_reclamation"));
-            r.setNom(rs.getString("nom"));
-            r.setPrenom(rs.getString("prenom"));
-            r.setNum(rs.getString("num"));
+            r.setId_reclamation(rs.getInt("id_reclamation")); 
+            r.setNum(rs.getString("numero"));
             r.setEmail(rs.getString("email"));
             r.setType(rs.getString("type"));
             r.setDescription(rs.getString("description"));
-
+            r.setEtat(rs.getString("etat"));
+              r.setDate(rs.getString("date"));
             return r;
         }
     } catch (SQLException ex) {
         System.out.println("Erreur lors de la récupération de la réclamation : " + ex.getMessage());
     }
 
-    return null; //
+    return null;
 }
-      
-    
-    
-
-    @Override
-    public List<Reclamation> getAll(Reclamation t) {
-        String req = "SELECT * FROM `reclamation`";
+    @Override   
+        public List<Reclamation> getAll() {
+        String req = "SELECT * FROM recl";
       ArrayList<Reclamation> reclamation = new ArrayList();
     Statement stm;
     try {
@@ -112,13 +117,13 @@ public ServiceReclamation(){
     while (rs.next()){
         Reclamation r = new Reclamation();
         r.setId_reclamation(rs.getInt(1));
-        r.setNom(rs.getString(2));
-        r.setPrenom(rs.getString(3));
-        r.setNum(rs.getString(4));
-        r.setEmail(rs.getString(5));
-        r.setType(rs.getString(6));
-        r.setDescription(rs.getString(7));
-        
+        r.setId_utilisateur(rs.getInt(2));
+        r.setNum(rs.getString(3));
+        r.setEmail(rs.getString(4));
+        r.setType(rs.getString(5));
+        r.setDescription(rs.getString(6));
+        r.setEtat(rs.getString(7));
+          r.setDate(rs.getString(8));
         reclamation.add(r);
     }
         
@@ -130,7 +135,17 @@ public ServiceReclamation(){
     }
     return reclamation;
     }
+      
     }
+    
+
+  
+
+   
+    
+
+
+ 
 
     
     
