@@ -28,13 +28,13 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label layoutX="114.0" layoutY="349.0" text="forgot your password?" />
+            <Label layoutX="114.0" layoutY="349.0" onMouseClicked="#forget" text="forgot your password?" />
             <Label layoutX="150.0" layoutY="45.0" prefHeight="58.0" prefWidth="280.0" text="Welcome">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button fx:id="login" layoutX="169.0" layoutY="391.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="login" textFill="WHITE">
+            <Button fx:id="login" layoutX="169.0" layoutY="391.0" mnemonicParsing="false" onAction="#loginform" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -44,7 +44,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="signup" layoutX="169.0" layoutY="495.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="sign up" textFill="WHITE">
+            <Button fx:id="signup" layoutX="169.0" layoutY="495.0" mnemonicParsing="false" onAction="#signupform" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="sign up" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>

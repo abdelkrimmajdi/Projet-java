@@ -15,6 +15,10 @@ public class utilisateur {
 
     public static utilisateur current_user;
 
+    public static void add(utilisateur u) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private int id_user;
     private int cin;
     private String prenom;

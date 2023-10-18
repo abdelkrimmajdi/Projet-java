@@ -7,7 +7,10 @@ package edu.esprit.pi.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -15,6 +18,19 @@ import javafx.fxml.Initializable;
  * @author aziz
  */
 public class AdminController implements Initializable {
+
+    @FXML
+    private TextArea iduser;
+    @FXML
+    private TextArea cin;
+    @FXML
+    private TextArea role;
+    @FXML
+    private Button chercher;
+    @FXML
+    private Button modifier;
+    @FXML
+    private Button supprimer;
 
     /**
      * Initializes the controller class.
