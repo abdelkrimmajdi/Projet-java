@@ -98,7 +98,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void loginform(ActionEvent event) {
+    private void loginform(ActionEvent event) throws IOException {
 
         String userEmail = email.getText();
         String userPassword = password.getText();
@@ -114,25 +114,57 @@ public class LoginController implements Initializable {
         }
 
         utilisateur u = new serviceUser().getUserByEmail(userEmail);
-        if (u != null && u.getPassword().equals(userPassword)) {
-            utilisateur.setCurrent_user(u);
-            //redirect to dashboard
-            //...
+        if (u != null) {
+            if (u.getPassword().equals(userPassword)) {
+                utilisateur.setCurrent_user(u);
+                if (utilisateur.current_user.getRole() == 1) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        login.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        login.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                showAlert("Error Failed Check Email");
+            }
+
         }
-        showAlert("Error Failed Check Email & Password");
     }
 
     @FXML
-    private void signupform(ActionEvent event) {
+    private void signupform(ActionEvent event
+    ) {
         try {
-            Parent root =  FXMLLoader.load(getClass().getResource("sign.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("sign.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("sign Up");
             stage.setScene(new Scene(root));
-            
+
             stage.show();
-            
+
             login.getScene().getWindow().hide();
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

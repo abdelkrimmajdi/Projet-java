@@ -14,6 +14,7 @@ import java.sql.Date;
 public class utilisateur {
 
     public static utilisateur current_user;
+    public static utilisateur edit_user;
 
     public static void add(utilisateur u) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
