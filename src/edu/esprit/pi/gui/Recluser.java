@@ -20,14 +20,14 @@ import javafx.stage.Stage;
  *
  * @author majdiabdelkrim
  */
-public class recluser extends Application {
+public class Recluser extends Application {
     
     @Override
     public void start(Stage primaryStage) {
            try{
           Parent  root =FXMLLoader.load(getClass().getResource("Reclamationaj.fxml"));
           Scene scene = new Scene( root);
-               primaryStage.setTitle("Ajouter une reclamtion");
+               primaryStage.setTitle("Takwira+");
                primaryStage.setScene(scene);
                primaryStage.show();
     }catch (IOException ex){

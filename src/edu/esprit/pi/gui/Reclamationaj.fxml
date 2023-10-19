@@ -16,13 +16,12 @@
             <Image url="@../../../../images/380337253_671491991622160_4104764925505569718_n.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGerer" layoutX="76.0" layoutY="392.0" mnemonicParsing="false" onAction="#Gererrecl" prefHeight="41.0" prefWidth="180.0" text="Gerer mes Reclamations" />
+      <Button fx:id="btnGerer" layoutX="628.0" layoutY="5.0" mnemonicParsing="false" onAction="#Gererrecl" prefHeight="41.0" prefWidth="180.0" text="Gerer mes Reclamations" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="6.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/logo.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="txttyp" layoutX="319.0" layoutY="109.0" onAction="#type" promptText="Etat" />
-      <TextField fx:id="cingere" layoutX="73.0" layoutY="325.0" promptText="Cin" />
+      <TextField fx:id="txttyp" layoutX="319.0" layoutY="109.0" promptText="Type" />
    </children>
 </AnchorPane>

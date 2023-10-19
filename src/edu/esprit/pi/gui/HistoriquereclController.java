@@ -98,7 +98,7 @@ public class HistoriquereclController implements Initializable {
         String description = repdescr.getText();
         if(tablerec.getSelectionModel().getSelectedItem()!=null){
             if(etat.isEmpty() || description.isEmpty()){
-                Alert alert = new Alert(AlertType.INFORMATION);
+                Alert alert = new Alert(AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez rempli les champs ");        
@@ -119,7 +119,7 @@ public class HistoriquereclController implements Initializable {
         mise();
             }}
         else{
-                 Alert alert = new Alert(AlertType.INFORMATION);
+                 Alert alert = new Alert(AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veiller selectionner une reclamation!");
@@ -134,7 +134,7 @@ public class HistoriquereclController implements Initializable {
 
   
         if(tablerec.getSelectionModel().getSelectedItem()==null){
-             Alert alert = new Alert(AlertType.INFORMATION);
+             Alert alert = new Alert(AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veiller selectionner une reclamation!");  

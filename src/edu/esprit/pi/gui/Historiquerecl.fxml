@@ -26,13 +26,18 @@
             <TableColumn fx:id="datee" prefWidth="125.0" text="Date" />
         </columns>
       </TableView>
-      <TextField fx:id="idrech" layoutX="458.0" layoutY="21.0" promptText="Id a rechercher" />
+      <TextField fx:id="idrech" layoutX="458.0" layoutY="21.0" promptText="Id reclamation a chercher" />
       <Button layoutX="645.0" layoutY="21.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="31.0" prefWidth="100.0" text="Rechercher" />
       <Button layoutX="745.0" layoutY="21.0" mnemonicParsing="false" onAction="#Tri" prefHeight="31.0" prefWidth="100.0" text="Tri" />
       <Button fx:id="gmr" layoutX="427.0" layoutY="589.0" mnemonicParsing="false" onAction="#gerermesreponse" prefHeight="31.0" prefWidth="169.0" text="Gerer mes reponse" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/logo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="938.0" layoutY="578.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/380337253_671491991622160_4104764925505569718_n.png" />
          </image>
       </ImageView>
    </children>
