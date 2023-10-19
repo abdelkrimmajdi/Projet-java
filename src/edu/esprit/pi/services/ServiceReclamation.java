@@ -136,7 +136,41 @@ public Reclamation getOne(int id) {
     return reclamation;
     }
       
+    public List<Reclamation> afficher(String cin) {
+    ArrayList<Reclamation> reclamation = new ArrayList<>();
+    try {
+        // Requête SQL pour récupérer les réclamations associées à l'utilisateur ayant le CIN donné
+        String req = "SELECT * FROM recl WHERE id_utilisateur = (SELECT id_utilisateur FROM user WHERE cin = ?)";
+        PreparedStatement preparedStatement = cnx.prepareStatement(req);
+        preparedStatement.setString(1, cin);
+        ResultSet rs = preparedStatement.executeQuery();
+        
+        while (rs.next()) {
+            Reclamation r = new Reclamation();
+            r.setId_reclamation(rs.getInt("id_reclamation"));
+            r.setNum(rs.getString("numero"));
+            r.setEmail(rs.getString("email"));
+            r.setType(rs.getString("type"));
+            r.setDescription(rs.getString("description"));
+            r.setEtat(rs.getString("etat"));
+            r.setDate(rs.getString("date"));
+            reclamation.add(r);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erreur lors de la récupération des réclamations : " + ex.getMessage());
     }
+
+    return reclamation;
+}
+
+
+
+
+
+            
+        }
+      
+   
     
 
   

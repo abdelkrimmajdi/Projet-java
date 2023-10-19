@@ -56,6 +56,8 @@ public class ReponseAdminController implements Initializable {
     private TextField dsecrrecl;
     @FXML
     private TableColumn<Reponse,String> ett;
+    @FXML
+    private TextField idrech;
 
     /**
      * Initializes the controller class.
@@ -91,7 +93,7 @@ public class ReponseAdminController implements Initializable {
             
         }
         else{
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Reponse modifier avec succés!");        
@@ -112,7 +114,9 @@ public class ReponseAdminController implements Initializable {
         alert.setContentText("Erreur lors de la modification!");        
         alert.show();
        
-    }   }
+    }   
+    
+}
 
     @FXML
     private void supprimerr(ActionEvent event) {
@@ -160,6 +164,34 @@ public class ReponseAdminController implements Initializable {
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
     }        
+    }
+
+    @FXML
+    private void Rechercher(ActionEvent event) {
+            idreponse.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reponse"));
+     idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
+       daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
+      texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
+     ett.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat")); 
+    
+      if(idrech.getText().isEmpty()){
+     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez remplir  champs de id!");        
+        alert.show();}
+     else{
+          int idReponse = Integer.parseInt(idrech.getText());
+    ServiceReponse service = new ServiceReponse();
+   List <Reponse>  rec = service.getOnee(idReponse);   
+     if (rec != null) {
+        ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(rec);
+        tablerepadmin.setItems(observableReponse);
+    } 
+    }}
+
+    @FXML
+    private void Tri(ActionEvent event) {
     }
     
 }

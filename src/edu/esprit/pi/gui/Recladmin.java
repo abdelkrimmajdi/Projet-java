@@ -27,7 +27,7 @@ public class Recladmin extends Application {
         try{
           Parent  root =FXMLLoader.load(getClass().getResource("Historiquerecl.fxml"));
           Scene scene = new Scene( root);
-               primaryStage.setTitle("Historique des Reclamation");
+               primaryStage.setTitle("Takwira+");
                primaryStage.setScene(scene);
                primaryStage.show();
     }catch (IOException ex){
