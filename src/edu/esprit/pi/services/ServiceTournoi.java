@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.edu.esprit.services;
+package edu.esprit.pi.services;
 import edu.esprit.pi.services.IService;
 import edu.esprit.pi.tools.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import tn.edu.esprit.entities.Tournoi;
+import edu.esprit.pi.entities.Tournoi;
 
 /**
  *
@@ -30,21 +31,47 @@ public ServiceTournoi(){
     @Override
     public void ajouter(Tournoi t) {
         try {
-            String req = "INSERT INTO `tournoi`(id_equipe,id_terrain,nbr_equipe,date_tournoi) VALUES ('"  + t.getEquipes() + "','" + t.getTerrain() + "','" + t.getNbr_equipe() + "','" + t.getDate_tournoi() + "')";
-            Statement stm = cnx.createStatement();
-            stm.executeUpdate(req);
-            System.out.println("Données ajoutées avec succès !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            
+        String selectInfoQuery = "SELECT id_terrain FROM terrain WHERE adresse = ?";
+        
+        PreparedStatement infoStmt = cnx.prepareStatement(selectInfoQuery);
+        infoStmt.setString(1, t.getAdresse()); 
+        
+        ResultSet infoResult = infoStmt.executeQuery();
+        
+        int idTerrain = 0;
+        
+        if (infoResult.next()) {
+            idTerrain = infoResult.getInt("id_terrain");
         }
+        
+        // Utilisez les valeurs récupérées dans la requête d'insertion
+        String insertQuery = "INSERT INTO tournoi (id_terrain, equipes, adresse, nbr_equipe, date_tournoi) " +
+                            "VALUES (?, ?, ?, ?, ?)";
+        
+        PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
+        insertStmt.setInt(1, idTerrain);
+        insertStmt.setString(2, t.getEquipes());
+        insertStmt.setString(3, t.getAdresse());
+        insertStmt.setInt(4, t.getNbr_equipe());
+        insertStmt.setDate(5, t.getDate_tournoi());
+        
+        
+
+        // Exécute la requête d'insertion
+        insertStmt.executeUpdate();
+        System.out.println("Donnée ajoutée avec succès!");
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
 
     }
 
     @Override
     public void modifier(Tournoi t) {
     try {
-        String req = "UPDATE tournoi SET id_equipe='" + t.getEquipes() + "', id_terrain='" + t.getTerrain() +
-                     "', nbr_equipe='" + t.getNbr_equipe() + "', date_tournoi='" + t.getDate_tournoi() + "' WHERE id_tournoi=" + t.getId_tournoi();
+        String req = "UPDATE tournoi SET equipes='" + t.getEquipes() + "', adresse='" + t.getAdresse() +
+                     "', nbr_equipe='" + t.getNbr_equipe() +  "', date_tournoi='" + t.getDate_tournoi() +  "' WHERE id_tournoi=" + t.getId_tournoi();
         Statement stm = cnx.createStatement();
         stm.executeUpdate(req);
         System.out.println("Données modifiées avec succès !");
@@ -67,11 +94,32 @@ public ServiceTournoi(){
 
     @Override
     public Tournoi getOne(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM `match` WHERE id_match = ?";
+        Tournoi tournoi = null;
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(query)) {
+        pstmt.setInt(1, id);
+
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                tournoi = new Tournoi();
+                tournoi.setId_tournoi(rs.getInt("id_tournoi"));
+                tournoi.setId_terrain(rs.getInt("id_terrain"));
+                tournoi.setEquipes(rs.getString("Equipe"));
+                tournoi.setNbr_equipe(rs.getInt("Nombre equipe"));
+                tournoi.setAdresse(rs.getString("Adresse"));
+                tournoi.setDate_tournoi(rs.getDate("Date_tournoi"));
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error while fetching data: " + ex.getMessage());
+    }
+
+    return tournoi;
     }
 
     @Override
-    public List<Tournoi> getAll(Tournoi t) {
+    public List<Tournoi> getAll() {
         String req = "SELECT * FROM `tournoi`";
         ArrayList<Tournoi> Tournoi = new ArrayList();
         Statement stm;
@@ -81,10 +129,11 @@ public ServiceTournoi(){
         while (rs.next()){
             Tournoi p = new Tournoi();
             p.setId_tournoi(rs.getInt(1));
-            p.setEquipes(rs.getString(2));
-            p.setTerrain(rs.getInt(3));
-            p.setNbr_equipe(rs.getInt(4));
-            p.setDate_tournoi(rs.getDate(5));
+            p.setId_terrain(rs.getInt(2));
+            p.setEquipes(rs.getString(3));
+            p.setAdresse(rs.getString(4));
+            p.setNbr_equipe(rs.getInt(5));
+            p.setDate_tournoi(rs.getDate(6));
         
         Tournoi.add(p);
         }

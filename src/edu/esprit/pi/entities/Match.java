@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.edu.esprit.entities;
-
-import edu.esprit.pi.entities.equipe;
+package edu.esprit.pi.entities;
 
 /**
  *
@@ -13,48 +11,37 @@ import edu.esprit.pi.entities.equipe;
  */
 public class Match {
     private int id_match;
-    private Resultat Resultat;
-    private equipe equipe1;
-    private equipe equipe2;
+    private int id_equipe1;
+    private int id_equipe2;
     
-    public enum Resultat {
-        EQUIPE_1_GAGNE,  // Résultat 1
-        EQUIPE_2_GAGNE   // Résultat 2
-    }
+    
+    private String nom_equipe1;
+    private String nom_equipe2;
+    private String Res;
+   
     public Match() {
     }
 
-    public Match(int id_match, Resultat Resultat, equipe equipe1, equipe equipe2) {
-        this.Resultat = Resultat;
-        this.equipe1 = equipe1;
-        this.equipe2 = equipe2;
-    }
-
-    public Resultat getResultat() {
-        return Resultat;
-    }
-
-    public void setResultat(Resultat Resultat) {
-        this.Resultat = Resultat;
-    }
-
-    public equipe getEquipe1() {
-        return equipe1;
-    }
-
-    public void setEquipe1(equipe equipe1) {
-        this.equipe1 = equipe1;
-    }
-
-    public equipe getEquipe2() {
-        return equipe2;
-    }
-
-    public void setEquipe2(equipe equipe2) {
-        this.equipe2 = equipe2;
+    public Match(int id_match, String nom_equipe1, String nom_equipe2, String Res) {
+        this.id_match = id_match;
+        this.nom_equipe1 = nom_equipe1;
+        this.nom_equipe2 = nom_equipe2;
+        this.Res = Res;
     }
     
-   
+    public Match(String Res, String nom_equipe1, String nom_equipe2) {
+        this.Res = Res;
+        this.nom_equipe1 = nom_equipe1;
+        this.nom_equipe2 = nom_equipe2;
+    }
+
+    public String getRes() {
+        return Res;
+    }
+
+    public void setRes(String Res) {
+        this.Res = Res;
+    }
 
     public int getId_match() {
         return id_match;
@@ -64,17 +51,50 @@ public class Match {
         this.id_match = id_match;
     }
 
+
+    public int getId_equipe1() {
+        return id_equipe1;
+    }
+
+    public void setId_equipe1(int id_equipe1) {
+        this.id_equipe1 = id_equipe1;
+    }
+
+    public String getNom_equipe1() {
+        return nom_equipe1;
+    }
+
+    public void setNom_equipe1(String nom_equipe1) {
+        this.nom_equipe1 = nom_equipe1;
+    }
+
+    public int getId_equipe2() {
+        return id_equipe2;
+    }
+
+    public void setId_equipe2(int id_equipe2) {
+        this.id_equipe2 = id_equipe2;
+    }
+
+    public String getNom_equipe2() {
+        return nom_equipe2;
+    }
+
+    public void setNom_equipe2(String nom_equipe2) {
+        this.nom_equipe2 = nom_equipe2;
+    }
+
     @Override
     public String toString() {
-        return "Match{" + "id_match=" + id_match + ", Resultat=" + Resultat + ", equipe1=" + equipe1 + ", id_equipe2=" + equipe2 + '}';
+        return "Match{" + "id_match=" + id_match + ", id_equipe1=" + id_equipe1 + ", id_equipe2=" + id_equipe2 + ", nom_equipe1=" + nom_equipe1 + ", nom_equipe2=" + nom_equipe2 + ", Res=" + Res + '}';
     }
 
     
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id_match;
+        int hash = 3;
+        hash = 97 * hash + this.id_match;
         return hash;
     }
 
@@ -96,5 +116,5 @@ public class Match {
         }
         return true;
     }
-    
-}
+
+}    
