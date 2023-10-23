@@ -52,6 +52,8 @@ public class ModifierMatchController implements Initializable {
     private TableColumn<Match, String> clResultat;
     @FXML
     private TableColumn<Match, String> clName_E2;
+    @FXML
+    private TextField txtnom_tournoi;
     /**
      * Initializes the controller class.
      */
@@ -87,7 +89,7 @@ public class ModifierMatchController implements Initializable {
     @FXML
     private void modifier(ActionEvent event) {
             ServiceMatch mac = new ServiceMatch();
-            if (TxtNom_equipe2.getText().isEmpty() || cbRes.getValue().isEmpty() || txtNom_equipe1.getText().isEmpty() || txtId_match.getText().isEmpty() ) {
+            if (TxtNom_equipe2.getText().isEmpty() ||txtnom_tournoi.getText().isEmpty() || cbRes.getValue().isEmpty() || txtNom_equipe1.getText().isEmpty() || txtId_match.getText().isEmpty() ) {
             Alert a = new Alert(Alert.AlertType.WARNING);
             a.setContentText("Veuillez saisir tous les champs ");
             a.setHeaderText(null);
@@ -97,8 +99,9 @@ public class ModifierMatchController implements Initializable {
                 String nom_equipe1=txtNom_equipe1.getText();
                 String nom_equipe2=TxtNom_equipe2.getText();
                 String res=cbRes.getValue();
+                String nom_tournoi=TxtNom_equipe2.getText();
                 int id_match= Integer.parseInt(txtId_match.getText());
-                Match e = new Match(id_match,nom_equipe1,nom_equipe2,res);
+                Match e = new Match(id_match,nom_tournoi,nom_equipe1,nom_equipe2,res);
                 mac.modifier(e);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

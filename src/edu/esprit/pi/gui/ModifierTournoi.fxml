@@ -33,22 +33,24 @@
                                           <TableColumn fx:id="clDates" prefWidth="75.0" text="Dates" />
                                        </columns>
                                     </TableView>
-                                 </children></AnchorPane>
-                              <Button layoutX="86.0" layoutY="516.0" mnemonicParsing="false" onAction="#modifier" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Modifier" textFill="WHITE">
+                                 </children>
+                              </AnchorPane>
+                              <Button layoutX="86.0" layoutY="548.0" mnemonicParsing="false" onAction="#modifier" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Modifier" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="25.0" />
                                  </font>
                               </Button>
-                              <TextField fx:id="txtAdresse" layoutX="39.0" layoutY="137.0" prefHeight="46.0" prefWidth="274.0" promptText="Adresse" />
+                              <TextField fx:id="txtAdresse" layoutX="39.0" layoutY="202.0" prefHeight="46.0" prefWidth="274.0" promptText="Adresse" />
                               <Label layoutX="-19.0" prefHeight="58.0" prefWidth="375.0" text="   Update a Tournemant:" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="32.0" />
                                  </font>
                               </Label>
-                              <Spinner fx:id="SpNbrEquipe" layoutX="39.0" layoutY="195.0" prefHeight="46.0" prefWidth="274.0" />
-                              <TextArea fx:id="TextListEquipe" layoutX="39.0" layoutY="256.0" prefHeight="136.0" prefWidth="274.0" promptText="List Equipes" />
-                              <DatePicker fx:id="DDate_tournoi" layoutX="39.0" layoutY="434.0" prefHeight="46.0" prefWidth="274.0" promptText="Date du Tournoi" />
+                              <Spinner fx:id="SpNbrEquipe" layoutX="39.0" layoutY="262.0" prefHeight="46.0" prefWidth="274.0" />
+                              <TextArea fx:id="TextListEquipe" layoutX="39.0" layoutY="319.0" prefHeight="136.0" prefWidth="274.0" promptText="List Equipes" />
+                              <DatePicker fx:id="DDate_tournoi" layoutX="39.0" layoutY="475.0" prefHeight="46.0" prefWidth="274.0" promptText="Date du Tournoi" />
                               <TextField fx:id="txtId_tournoi" layoutX="39.0" layoutY="77.0" prefHeight="46.0" prefWidth="274.0" promptText="ID Tournoi" />
+                              <TextField fx:id="txtnom_tournoi" layoutX="39.0" layoutY="135.0" prefHeight="46.0" prefWidth="274.0" promptText="nom_tournoi" />
                            </children>
                         </AnchorPane>
                      </children>

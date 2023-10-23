@@ -11,10 +11,11 @@ package edu.esprit.pi.entities;
  */
 public class Match {
     private int id_match;
+    private int id_tournoi;
     private int id_equipe1;
     private int id_equipe2;
     
-    
+    private String nom_tournoi;
     private String nom_equipe1;
     private String nom_equipe2;
     private String Res;
@@ -22,15 +23,17 @@ public class Match {
     public Match() {
     }
 
-    public Match(int id_match, String nom_equipe1, String nom_equipe2, String Res) {
+    public Match(int id_match, String nom_tournoi, String nom_equipe1, String nom_equipe2, String Res) {
         this.id_match = id_match;
+        this.nom_tournoi = nom_tournoi;
         this.nom_equipe1 = nom_equipe1;
         this.nom_equipe2 = nom_equipe2;
         this.Res = Res;
     }
     
-    public Match(String Res, String nom_equipe1, String nom_equipe2) {
+    public Match(String Res, String nom_tournoi, String nom_equipe1, String nom_equipe2) {
         this.Res = Res;
+        this.nom_tournoi = nom_tournoi;
         this.nom_equipe1 = nom_equipe1;
         this.nom_equipe2 = nom_equipe2;
     }
@@ -38,11 +41,27 @@ public class Match {
     public String getRes() {
         return Res;
     }
-
+    
     public void setRes(String Res) {
         this.Res = Res;
     }
 
+    public String getNom_tournoi() {
+        return nom_tournoi;
+    }
+
+    public void setNom_tournoi(String nom_tournoi) {
+        this.nom_tournoi = nom_tournoi;
+    }
+    
+    public int getId_tournoi() {
+        return id_tournoi;
+    }
+
+    public void setId_tournoi(int id_tournoi) {
+        this.id_tournoi = id_tournoi;
+    }
+    
     public int getId_match() {
         return id_match;
     }
@@ -86,9 +105,10 @@ public class Match {
 
     @Override
     public String toString() {
-        return "Match{" + "id_match=" + id_match + ", id_equipe1=" + id_equipe1 + ", id_equipe2=" + id_equipe2 + ", nom_equipe1=" + nom_equipe1 + ", nom_equipe2=" + nom_equipe2 + ", Res=" + Res + '}';
+        return "Match{" + "id_match=" + id_match + ", id_tournoi=" + id_tournoi + ", id_equipe1=" + id_equipe1 + ", id_equipe2=" + id_equipe2 + ", nom_tournoi=" + nom_tournoi + ", nom_equipe1=" + nom_equipe1 + ", nom_equipe2=" + nom_equipe2 + ", Res=" + Res + '}';
     }
 
+    
     
 
     @Override
