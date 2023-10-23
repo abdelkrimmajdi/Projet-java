@@ -9,6 +9,7 @@ import edu.esprit.pi.entities.Reclamation;
 import edu.esprit.pi.entities.Reponse;
 import edu.esprit.pi.services.ServiceReclamation;
 import edu.esprit.pi.services.ServiceReponse;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -38,8 +39,7 @@ import javafx.stage.Stage;
  */
 public class ReponseAdminController implements Initializable {
 
-    @FXML
-    private TableColumn<Reponse, Integer> idreponse;
+  
     @FXML
     private TableColumn<Reponse, Integer> idrecrep;
     @FXML
@@ -58,18 +58,18 @@ public class ReponseAdminController implements Initializable {
     private TableColumn<Reponse,String> ett;
     @FXML
     private TextField idrech;
+    int index = -1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  idreponse.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reponse"));
+  
      idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
        daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
       texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
      ett.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat")); 
-    
     ServiceReponse service = new ServiceReponse();
     List<Reponse> reponses = service.getAll();
     ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(reponses);
@@ -84,23 +84,21 @@ public class ReponseAdminController implements Initializable {
         selectedReclamation.setText_reponse(dsecrrecl.getText());
         service.modifier(selectedReclamation);
         if(Etatrepp.getText().isEmpty()||dsecrrecl.getText().isEmpty()){
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir les champs!");        
         alert.show();
-       
-            
         }
         else{
-        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Reponse modifier avec succés!");        
         alert.show();
         tablerepadmin.refresh();}}
         else{
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuilez selectionnée!");        
@@ -108,7 +106,7 @@ public class ReponseAdminController implements Initializable {
                 
     }}
            catch (NumberFormatException e) {
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+         Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Erreur lors de la modification!");        
@@ -117,7 +115,7 @@ public class ReponseAdminController implements Initializable {
     }   
     
 }
-
+   
     @FXML
     private void supprimerr(ActionEvent event) {
         
@@ -132,7 +130,7 @@ public class ReponseAdminController implements Initializable {
         alert.show();
         update();}
        else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez selectionnée!");        
@@ -141,7 +139,7 @@ public class ReponseAdminController implements Initializable {
     }
 
     private void update() {
-        idreponse.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reponse"));
+        
      idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
        daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
       texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
@@ -168,14 +166,14 @@ public class ReponseAdminController implements Initializable {
 
     @FXML
     private void Rechercher(ActionEvent event) {
-            idreponse.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reponse"));
+   
      idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
        daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
       texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
      ett.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat")); 
     
       if(idrech.getText().isEmpty()){
-     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+     Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir  champs de id!");        
@@ -192,6 +190,17 @@ public class ReponseAdminController implements Initializable {
 
     @FXML
     private void Tri(ActionEvent event) {
+    }
+
+    @FXML
+    private void Select(javafx.scene.input.MouseEvent event) {
+         index = tablerepadmin.getSelectionModel().getSelectedIndex();
+        if (index <= -1){
+            return ;
+        }
+        Etatrepp.setText(texterep.getCellData(index).toString());
+       dsecrrecl.setText(ett.getCellData(index).toString());   
+   
     }
     
 }

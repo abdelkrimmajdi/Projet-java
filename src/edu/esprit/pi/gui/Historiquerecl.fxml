@@ -16,8 +16,6 @@
       <Button fx:id="supprimerre" layoutX="249.0" layoutY="589.0" mnemonicParsing="false" onAction="#supprimerreclamatio" prefHeight="31.0" prefWidth="152.0" text="Supprimer" />
       <TableView fx:id="tablerec" layoutX="325.0" layoutY="87.0" prefHeight="410.0" prefWidth="798.0">
         <columns>
-          <TableColumn fx:id="idreclamtion" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="idus" prefWidth="75.0" text="ID User" />
             <TableColumn fx:id="nul" prefWidth="75.0" text="Numero" />
             <TableColumn fx:id="eml" prefWidth="138.0" text="Email" />
             <TableColumn fx:id="desr" prefWidth="159.0" text="Description" />
@@ -35,7 +33,7 @@
             <Image url="@../../../../images/logo.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="938.0" layoutY="578.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="930.0" layoutY="627.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/380337253_671491991622160_4104764925505569718_n.png" />
          </image>

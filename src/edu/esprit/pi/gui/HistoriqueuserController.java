@@ -35,9 +35,7 @@ import javafx.scene.control.Alert;
  */
 public class HistoriqueuserController implements Initializable {
 
-    @FXML
-    private TableColumn<Reclamation, Integer> idhru;
-    @FXML
+   
     private TableColumn<Reclamation, String> typehra;
     @FXML
     private TableColumn<Reclamation, String> numhra;
@@ -61,50 +59,63 @@ public class HistoriqueuserController implements Initializable {
     private TableColumn<Reclamation, String> datehru;
     @FXML
     private TextField txtcin;
+public  void getCinnn(String cin){
 
+    this.txtcin.setText(cin);
+            }
+int index = -1;
     /**
      * Initializes the controller class.
      */
     
-     public  void getCinnn(String cin){
 
-    this.txtcin.setText(cin);
-            }
 
     public void initialize(URL url, ResourceBundle rb) {
-         idhru.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_reclamation"));
-     typehra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
+     
+      
        numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
       emailhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
      deschra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description")); 
      etathru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("etat"));
      hra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
      datehru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("date"));
-   
     ServiceReclamation service = new ServiceReclamation();
     List<Reclamation>  rec = service.afficher(txtcin.getText());   
      
         ObservableList<Reclamation> observableReclamation = FXCollections.observableArrayList(rec);
         tableuserrec.setItems(observableReclamation);
+     
+     
+  
+     
+   }   
     
-        
-    } 
-    
+   
+    @FXML  
+    private void Select(javafx.scene.input.MouseEvent event) {
+         index = tableuserrec.getSelectionModel().getSelectedIndex();
+        if (index <= -1){
+            return ;
+        }
+        txttyhra.setText(hra.getCellData(index).toString());
+       textdehra.setText(deschra.getCellData(index).toString());   
+   
+    }
 
     @FXML
     private void supphra(ActionEvent event) {
-        if(tableuserrec.getSelectionModel().getSelectedItem()!=null){
-            int id=tableuserrec.getSelectionModel().getSelectedItem().getId_reclamation();
+        if(tableuserrec.getSelectionModel().getSelectedItem()!=null){ 
+        int id=tableuserrec.getSelectionModel().getSelectedItem().getId_reclamation();
         ServiceReclamation service = new ServiceReclamation();
         service.supprimer(id);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Reclamation supprimer avec succés!");        
         alert.show();
         tableuserrec.refresh();}
        else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez selectionnée!");        
@@ -119,11 +130,11 @@ public class HistoriqueuserController implements Initializable {
             ServiceReclamation service =new ServiceReclamation();
         Reclamation selectedReclamation = tableuserrec.getSelectionModel().getSelectedItem();
     if (selectedReclamation != null) {
-         selectedReclamation.setEtat(textdehra.getText());
+         selectedReclamation.setDescription(textdehra.getText());
         selectedReclamation.setType(txttyhra.getText());
-        service.modifier(selectedReclamation);
+       
         if(txttyhra.getText().isEmpty()||textdehra.getText().isEmpty()){
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir les champs!");        
@@ -132,6 +143,7 @@ public class HistoriqueuserController implements Initializable {
             
         }
         else{
+             service.modifier(selectedReclamation);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
@@ -152,7 +164,7 @@ public class HistoriqueuserController implements Initializable {
 
     @FXML
     private void Rechercher(ActionEvent event) {
-          idhru.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_reclamation"));
+          
      typehra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
        numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
       emailhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
@@ -184,22 +196,23 @@ public class HistoriqueuserController implements Initializable {
     }
 
     @FXML
-    private void Reponseuser(ActionEvent event) {
+    private void Reponseuser(ActionEvent event) {  
                  try {
-        Parent root = FXMLLoader.load(getClass().getResource("HistoriquerepUser.fxml"));
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Historique des Reponses");
-        currentStage.show();
+              String cin=txtcin.getText();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HistoriquerepUser.fxml"));
+        Parent root =loader.load();
+        HistoriquerepUserController dc= loader.getController();
+        dc.getCinnn(cin);
+        txtcin.getScene().setRoot(root);
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
     }        
     }
+    
 
     @FXML
     private void Mettreaj(ActionEvent event) {
-        idhru.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_reclamation"));
-     typehra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
+      
        numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
       emailhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
      deschra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description")); 
@@ -207,7 +220,7 @@ public class HistoriqueuserController implements Initializable {
      hra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
      datehru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("date"));
      if(txtcin.getText().isEmpty()){
-     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+     Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir  champs de cin!");        
@@ -215,10 +228,10 @@ public class HistoriqueuserController implements Initializable {
      else{
     ServiceReclamation service = new ServiceReclamation();
     List<Reclamation>  rec = service.afficher(txtcin.getText());   
-     if (rec != null) {
+     
         ObservableList<Reclamation> observableReclamation = FXCollections.observableArrayList(rec);
         tableuserrec.setItems(observableReclamation);
-    } 
+     
      }
     }
 
@@ -232,7 +245,7 @@ public class HistoriqueuserController implements Initializable {
         currentStage.show();
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
-    }        
+    }         
     }
     }
     

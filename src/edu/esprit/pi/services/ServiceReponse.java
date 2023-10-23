@@ -36,8 +36,7 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
     } catch (SQLException ex) {
         System.out.println("Erreur lors de l'ajout de la réponse : " + ex.getMessage());
     }
-        
-     
+
     }
 
     @Override
@@ -131,7 +130,6 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
     public List<Reponse> afficher (String cin){
          ArrayList<Reponse> reponse = new ArrayList<>();
     try {
-        // Requête SQL pour récupérer les réclamations associées à l'utilisateur ayant le CIN donné
         String req = "SELECT re.* FROM reponse re JOIN recl r ON re.id_reclamation = r.id_reclamation JOIN user u ON r.id_utilisateur = u.id_utilisateur WHERE u.cin =?" ;
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
         preparedStatement.setString(1, cin);
@@ -157,12 +155,11 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
  public List<Reponse> getOnee(int id) {
     ArrayList<Reponse> reponse = new ArrayList<>();
     try {
-        // Requête SQL pour récupérer les réponses associées à une réclamation spécifique
+       
         String req = "SELECT * FROM reponse WHERE id_reclamation = ?";
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
         preparedStatement.setInt(1, id);
         ResultSet rs = preparedStatement.executeQuery();
-
         while (rs.next()) {
             Reponse r = new Reponse();
             r.setId_reponse(rs.getInt("id_reponse"));
@@ -170,14 +167,13 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
             r.setDate_reponse(rs.getString("date_reponse"));
             r.setText_reponse(rs.getString("texte_reponse"));
             r.setEtat(rs.getString("etat"));
-
             reponse.add(r);
         }
     } catch (SQLException ex) {
         System.out.println("Erreur lors de la récupération des réponses : " + ex.getMessage());
     }
     
-    return reponse; // Retournez la liste des réponses
+    return reponse; 
 }}
     
     

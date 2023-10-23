@@ -6,22 +6,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.ReclamationajController">
+<AnchorPane id="AnchorPane" prefHeight="619.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.ReclamationajController">
    <children>
-      <TextField fx:id="txtcin" layoutX="319.0" layoutY="49.0" promptText="Cin" />
-      <TextField fx:id="txtdescription" layoutX="315.0" layoutY="171.0" prefHeight="198.0" prefWidth="194.0" promptText="Description" />
-      <Button fx:id="aj" layoutX="315.0" layoutY="392.0" mnemonicParsing="false" onAction="#ajoteereclamation" prefHeight="41.0" prefWidth="194.0" text="Ajouter" />
-      <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="527.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/380337253_671491991622160_4104764925505569718_n.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="btnGerer" layoutX="628.0" layoutY="5.0" mnemonicParsing="false" onAction="#Gererrecl" prefHeight="41.0" prefWidth="180.0" text="Gerer mes Reclamations" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="6.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/logo.jpg" />
-         </image>
-      </ImageView>
-      <TextField fx:id="txttyp" layoutX="319.0" layoutY="109.0" promptText="Type" />
+      <TextField fx:id="txtcin" layoutX="673.0" layoutY="60.0" promptText="Cin" />
+      <TextField fx:id="txtdescription" layoutX="673.0" layoutY="161.0" prefHeight="198.0" prefWidth="194.0" promptText="Description" />
+      <Button fx:id="aj" layoutX="554.0" layoutY="413.0" mnemonicParsing="false" onAction="#ajoteereclamation" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Ajouter" textFill="WHITE" />
+      <Button fx:id="btnGerer" layoutX="770.0" layoutY="413.0" mnemonicParsing="false" onAction="#Gererrecl" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Gerer mes Reclamations" textFill="WHITE" />
+      <TextField fx:id="txttyp" layoutX="673.0" layoutY="113.0" promptText="Type" />
+      <AnchorPane prefHeight="624.0" prefWidth="512.0" style="-fx-background-color: #262626;">
+         <children>
+            <ImageView fitHeight="432.0" fitWidth="352.0" layoutX="80.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/logo.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

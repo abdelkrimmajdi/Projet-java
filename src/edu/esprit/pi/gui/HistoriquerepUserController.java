@@ -37,10 +37,6 @@ public class HistoriquerepUserController implements Initializable {
     @FXML
     private TableView<Reponse> tablerecluser;
     @FXML
-    private TableColumn<Reponse,Integer> idrepu;
-    @FXML
-    private TableColumn<Reponse,Integer> idrec;
-    @FXML
     private TableColumn<Reponse,String> txtrep;
     @FXML
     private TableColumn<Reponse,String> etat;
@@ -50,15 +46,24 @@ public class HistoriquerepUserController implements Initializable {
     private TextField txtrepc;
     @FXML
     private TextField txtcin;
+    public  void getCinnn(String cin){
+
+    this.txtrepc.setText(cin);
+            }
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+  etat.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat"));
+  daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
+    txtrep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse")); 
+    ServiceReponse service = new ServiceReponse();
+    List<Reponse>  rec = service.afficher(txtrepc.getText());   
+        ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(rec);
+        tablerecluser.setItems(observableReponse);          
+    }       
     @FXML
     private void retourhistoriquereclamationuser(ActionEvent event) {
        
@@ -68,7 +73,6 @@ public class HistoriquerepUserController implements Initializable {
         currentStage.setScene(new Scene(root));
         currentStage.setTitle("Takwira+");
         currentStage.show();
-        
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
     }        
@@ -80,8 +84,6 @@ public class HistoriquerepUserController implements Initializable {
 
     @FXML
     private void rechrepuser(ActionEvent event) {
-         idrepu.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reponse"));
- idrec.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
   etat.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat"));
   daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
     txtrep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
@@ -95,19 +97,14 @@ public class HistoriquerepUserController implements Initializable {
           int idReponse = Integer.parseInt(txtcin.getText());
     ServiceReponse service = new ServiceReponse();
    List <Reponse>  rec = service.getOnee(idReponse);   
-     if (rec != null) {
+    
         ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(rec);
         tablerecluser.setItems(observableReponse);
-    } 
-     }
-        
-    }
+    } } 
 
     @FXML
     private void majj(ActionEvent event) {
-     
- idrepu.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reponse"));
- idrec.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
+   
   etat.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat"));
   daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
     txtrep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
@@ -126,5 +123,6 @@ public class HistoriquerepUserController implements Initializable {
     } 
      }
     }
+    
     
 }
