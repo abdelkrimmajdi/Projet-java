@@ -98,16 +98,15 @@ public class serviceUser implements IService<utilisateur> {
         stm = this.cnx.createStatement();
     
     
-        ResultSet us=  stm.executeQuery(user);
-    while (us.next()){
-        Reclamation r = new Reclamation();
-        r.setId_reclamation(rs.getInt(1));
+        ResultSet rs=  stm.executeQuery(user);
+    while (rs.next()){
+       utilisateur r = new utilisateur ();
+        r.setId_user(rs.getInt(1));
         r.setNom(rs.getString(2));
         r.setPrenom(rs.getString(3));
         r.setNum(rs.getString(4));
-        r.setEmail(rs.getString(5));
-        r.setType(rs.getString(6));
-        r.setDescription(rs.getString(7));
+        r.setMail(rs.getString(5));
+     
         
         reclamation.add(r);
     }
