@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.edu.esprit.services;
+package edu.esprit.pi.services;
 import edu.esprit.pi.entities.equipe;
 import edu.esprit.pi.services.IService;
 import edu.esprit.pi.tools.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import tn.edu.esprit.entities.Match;
-import tn.edu.esprit.entities.Match.Resultat;
+import edu.esprit.pi.entities.Match;
+
 
 
 /**
@@ -28,29 +29,66 @@ Connection cnx ;
 
 public ServiceMatch(){
     this.cnx= DataSource.getInstance().getConnection();
-}
-
+}   
     @Override
     public void ajouter(Match t) {
-        try {
-            String req = "INSERT INTO `match` (Resultat, equipe1, equipe2) VALUES ('" + t.getResultat() + "', " 
-                    + t.getEquipe1() + ", " + t.getEquipe2() + ")";
-            
-            Statement stm = cnx.createStatement();
-            stm.executeUpdate(req);
-            System.out.println("Données ajoutées avec succès !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+    try {
+        String selectInfoQuery1 = "SELECT id_equipe FROM equipe WHERE nom_equipe = ?";
+        
+        PreparedStatement infoStmt1 = cnx.prepareStatement(selectInfoQuery1);
+        infoStmt1.setString(1, t.getNom_equipe1()); 
+        
+        ResultSet infoResult1 = infoStmt1.executeQuery();
+        
+        int idEquipe1 = 0;
+        
+        if (infoResult1.next()) {
+            idEquipe1 = infoResult1.getInt("id_equipe");
+        }
+        String selectInfoQuery2 = "SELECT id_equipe FROM equipe WHERE nom_equipe = ?";
+        
+        PreparedStatement infoStmt2 = cnx.prepareStatement(selectInfoQuery2);
+        infoStmt2.setString(1, t.getNom_equipe2()); 
+        
+        ResultSet infoResult = infoStmt2.executeQuery();
+        
+        int idEquipe2 = 0;
+        
+        if (infoResult.next()) {
+            idEquipe2 = infoResult.getInt("id_equipe");
         }
 
+        // Utilisez les valeurs récupérées dans la requête d'insertion
+        String insertQuery = "INSERT INTO `match` (Resultat, nom_equipe1, id_equipe1, nom_equipe2, id_equipe2) " +
+                            "VALUES (?, ?, ?, ?, ?)";
+
+        
+        PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
+        // Map the Resultat enum to the integer value
+ 
+
+        // Set the mapped value in the prepared statement
+        insertStmt.setString(1, t.getRes());
+        insertStmt.setString(2, t.getNom_equipe1());
+        insertStmt.setInt(3, idEquipe1);
+        insertStmt.setString(4, t.getNom_equipe2());
+        insertStmt.setInt(5, idEquipe2);
+        
+
+        // Exécute la requête d'insertion
+        insertStmt.executeUpdate();
+        System.out.println("Donnée ajoutée avec succès!");
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
+}
+    
 
     @Override
     public void modifier(Match t) {
     try {
-        String req = "UPDATE `match` SET Resultat='" + t.getResultat() + "', equipe1='" 
-                + t.getEquipe1()+ "', equipe2='" + t.getEquipe2() + 
-                "' WHERE id_match=" + t.getId_match();
+           String req = "UPDATE `match` SET Resultat='" + t.getRes() + "', nom_equipe1='" + t.getNom_equipe1() + 
+           "', nom_equipe2='" + t.getNom_equipe2() +  "' WHERE id_match = " + t.getId_match();
         Statement stm = cnx.createStatement();
         stm.executeUpdate(req);
         System.out.println("Données modifiées avec succès !");
@@ -71,49 +109,61 @@ public ServiceMatch(){
     }
     }
     
-    public int getEquipeId(equipe e) {
-        return e.getId();
-    }
 
     @Override
-    public Match getOne(int id ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Match getOne(int id) {
+    String query = "SELECT * FROM `match` WHERE id_match = ?";
+    Match match = null;
+
+    try (PreparedStatement pstmt = cnx.prepareStatement(query)) {
+        pstmt.setInt(1, id);
+
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                match = new Match();
+                match.setId_match(rs.getInt("id_match"));
+                match.setId_equipe1(rs.getInt("id_equipe1"));
+                match.setId_equipe2(rs.getInt("id_equipe2"));
+                match.setRes(rs.getString("Res"));
+                match.setNom_equipe1(rs.getString("nom_equipe1"));
+                match.setNom_equipe2(rs.getString("nom_equipe2"));
+                
+                
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error while fetching data: " + ex.getMessage());
     }
 
+    return match;
+ }
     @Override
-    public List<Match> getAll(Match t) {
+    public List<Match> getAll() {
         String req = "SELECT * FROM `match`";
-        ArrayList<Match> Match = new ArrayList();
+        ArrayList<Match> matches = new ArrayList<>();
         Statement stm;
+
         try {
             stm = this.cnx.createStatement();
-            ResultSet rs=  stm.executeQuery(req);
-        while (rs.next()){
-            Match p = new Match();
-            p.setId_match(rs.getInt(1));
-            p.setResultat(Resultat.values()[rs.getInt(2) - 1]);
-            int equipe1Id = rs.getInt(3);
-            int equipe2Id = rs.getInt(4);
+            ResultSet rs = stm.executeQuery(req);
 
-            equipe equipe1 = new equipe(); // Create an equipe object
-            equipe1.setId(equipe1Id); // Set its ID
+            while (rs.next()) {
+                Match match = new Match();
+                match.setId_match(rs.getInt(1));
+                match.setId_equipe1(rs.getInt(2));
+                match.setId_equipe2(rs.getInt(3));
+                match.setRes(rs.getString(4));
+                match.setNom_equipe1(rs.getString(5));
+                match.setNom_equipe2(rs.getString(6));
+                
 
-            equipe equipe2 = new equipe(); // Create another equipe object
-            equipe2.setId(equipe2Id); // Set its ID
+                matches.add(match);
+            }
 
-            p.setEquipe1(equipe1); // Set equipe1 with the equipe object
-            p.setEquipe2(equipe2); // Set equipe2 with the equipe object
-        
-            Match.add(p);
+        } catch (SQLException ex) {
+            System.out.println("Error while fetching data: " + ex.getMessage());
         }
-        
-        
-    } catch (SQLException ex) {
-    
-        System.out.println(ex.getMessage());
-    
-    }
-    return Match;
-    }
 
+        return matches;
+    }
 }

@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.edu.esprit.entities;
+package edu.esprit.pi.entities;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -15,20 +13,43 @@ import java.util.List;
  */
 public class Tournoi {
     private int id_tournoi;
+    private int id_terrain;
+    
+  
     private String equipes;
-    private Terrain terrain;
+    private String adresse;
     private int nbr_equipe;
     private Date date_tournoi;
 
     public Tournoi() {
     }
 
-    public Tournoi(String equipes, Terrain terrain, int nbr_equipe, Date date_tournoi) {
+    public Tournoi(String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
         this.equipes = equipes;
-        this.terrain = terrain;
+        this.adresse = adresse;
         this.nbr_equipe = nbr_equipe;
         this.date_tournoi = date_tournoi;
     }
+
+    public Tournoi(int id_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
+        this.id_tournoi = id_tournoi;
+        this.equipes = equipes;
+        this.adresse = adresse;
+        this.nbr_equipe = nbr_equipe;
+        this.date_tournoi = date_tournoi;
+    }
+    
+    public Tournoi(int id_tournoi, int id_terrain, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
+        this.id_tournoi = id_tournoi;
+        this.id_terrain = id_terrain;
+        this.equipes = equipes;
+        this.adresse = adresse;
+        this.nbr_equipe = nbr_equipe;
+        this.date_tournoi = date_tournoi;
+    }
+    
+
+    
 
     public String getEquipes() {
         return equipes;
@@ -48,9 +69,22 @@ public class Tournoi {
         this.date_tournoi = date_tournoi;
     }
 
-    
+    public int getId_terrain() {
+        return id_terrain;
+    }
 
-    
+    public void setId_terrain(int id_terrain) {
+        this.id_terrain = id_terrain;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
     public int getId_tournoi() {
         return id_tournoi;
     }
@@ -66,19 +100,15 @@ public class Tournoi {
     public void setNbr_equipe(int nbr_equipe) {
         this.nbr_equipe = nbr_equipe;
     }
-
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
-    }
+    
+    
 
     @Override
     public String toString() {
-        return "Tournoi{" + "id_tournoi=" + id_tournoi + ", equipes=" + equipes + ", terrain=" + terrain + ", nbr_equipe=" + nbr_equipe + ", date_tournoi=" + date_tournoi + '}';
+        return "Tournoi{" + "id_tournoi=" + id_tournoi + ", equipes=" + equipes + ", id_terrain=" + id_terrain + ", adresse=" + adresse + ", nbr_equipe=" + nbr_equipe + ", date_tournoi=" + date_tournoi + '}';
     }
+
+    
 
     
     @Override
