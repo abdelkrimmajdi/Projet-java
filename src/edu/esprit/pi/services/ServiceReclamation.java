@@ -36,11 +36,10 @@ try {
     ResultSet resultSet = selectStmt.executeQuery();
 
     if (resultSet.next()) {
-         // Il y a une correspondance dans la table "user", vous pouvez maintenant effectuer l'insertion.
         String insertQuery = "INSERT INTO recl (numero, email, id_utilisateur, type, description, etat) " +
                             "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
-        insertStmt.setInt(1, resultSet.getInt("num"));
+        insertStmt.setString(1, resultSet.getString("num"));
         insertStmt.setString(2, resultSet.getString("email"));
         insertStmt.setInt(3, resultSet.getInt("id_utilisateur"));
         insertStmt.setString(4, t.getType());
@@ -95,7 +94,7 @@ public Reclamation getOne(int id) {
             r.setType(rs.getString("type"));
             r.setDescription(rs.getString("description"));
             r.setEtat(rs.getString("etat"));
-              r.setDate(rs.getString("date"));
+              r.setDate(rs.getString("date_recl"));
             return r;
         }
     } catch (SQLException ex) {
@@ -139,7 +138,7 @@ public Reclamation getOne(int id) {
     public List<Reclamation> afficher(String cin) {
     ArrayList<Reclamation> reclamation = new ArrayList<>();
     try {
-        // Requête SQL pour récupérer les réclamations associées à l'utilisateur ayant le CIN donné
+     
         String req = "SELECT * FROM recl WHERE id_utilisateur = (SELECT id_utilisateur FROM user WHERE cin = ?)";
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
         preparedStatement.setString(1, cin);
@@ -153,7 +152,7 @@ public Reclamation getOne(int id) {
             r.setType(rs.getString("type"));
             r.setDescription(rs.getString("description"));
             r.setEtat(rs.getString("etat"));
-            r.setDate(rs.getString("date"));
+            r.setDate(rs.getString("date_recl"));
             reclamation.add(r);
         }
     } catch (SQLException ex) {
@@ -161,14 +160,7 @@ public Reclamation getOne(int id) {
     }
 
     return reclamation;
-}
-
-
-
-
-
-            
-        }
+}}
       
    
     

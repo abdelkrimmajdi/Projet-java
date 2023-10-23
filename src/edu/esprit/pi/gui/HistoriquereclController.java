@@ -49,10 +49,6 @@ public class HistoriquereclController implements Initializable {
     private Button supprimerre;
     private TextField idrepon;
     @FXML
-    private TableColumn<Reclamation, Integer> idreclamtion;
-    @FXML
-    private TableColumn<Reclamation, Integer> idus;
-    @FXML
     private TableColumn<Reclamation, String> nul;
     @FXML
     private TableColumn<Reclamation, String> eml;
@@ -76,8 +72,7 @@ public class HistoriquereclController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    idreclamtion.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_reclamation"));
-     idus.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_utilisateur"));
+  
       nul.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
        eml.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
         desr.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description"));
@@ -98,7 +93,7 @@ public class HistoriquereclController implements Initializable {
         String description = repdescr.getText();
         if(tablerec.getSelectionModel().getSelectedItem()!=null){
             if(etat.isEmpty() || description.isEmpty()){
-                Alert alert = new Alert(AlertType.INFORMATION.WARNING);
+                Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez rempli les champs ");        
@@ -158,8 +153,7 @@ public class HistoriquereclController implements Initializable {
     
 
     private void mise(){
-              idreclamtion.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_reclamation"));
-     idus.setCellValueFactory(new PropertyValueFactory <Reclamation,Integer>("id_utilisateur"));
+    
       nul.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
        eml.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
         desr.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description"));
@@ -191,9 +185,7 @@ public class HistoriquereclController implements Initializable {
         currentStage.show();
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
-    }
-        
-        
+    }        
     }
 
 

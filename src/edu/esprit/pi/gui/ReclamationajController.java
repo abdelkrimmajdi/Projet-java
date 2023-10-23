@@ -36,10 +36,11 @@ public class ReclamationajController {
     @FXML
     private TextField txttyp;
 
-    public  void getCinnn(String cin){
+ public  void getCinnn(String cin){
 
     this.txtcin.setText(cin);
             }
+
 
     @FXML
     private void ajoteereclamation(ActionEvent event) {
@@ -62,22 +63,32 @@ public class ReclamationajController {
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Reclamation Ajoutée avec succés!");        
-        alert.show();}
+        alert.show();} 
         
     }
 
     @FXML
     private void Gererrecl(ActionEvent event) {
-          try {
+         try {
               String cin=txtcin.getText();
+           
+                      if (cin.isEmpty()){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuiller remplir les champs!");        
+        alert.show();
+        } 
+         else{    
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Historiqueuser.fxml"));
         Parent root =loader.load();
         HistoriqueuserController dc= loader.getController();
         dc.getCinnn(cin);
         txtcin.getScene().setRoot(root);
-    } catch (IOException ex) {
+    }} catch (IOException ex) {
         System.out.println(ex.getMessage());
-    }        
+    }       
+    
     }
     /**
      * Initializes the controller class.
