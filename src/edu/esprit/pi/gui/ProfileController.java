@@ -7,98 +7,98 @@ package edu.esprit.pi.gui;
 
 import edu.esprit.pi.entities.utilisateur;
 import edu.esprit.pi.services.serviceUser;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import static sun.security.jgss.GSSUtil.login;
-import sun.security.util.Password;
 
 /**
  * FXML Controller class
  *
  * @author aziz
  */
-public class SignController implements Initializable {
+public class ProfileController implements Initializable {
+
+    utilisateur user;
 
     @FXML
-    private ImageView imglogo;
+    private TextField cinField;
     @FXML
-    private AnchorPane s;
+    private TextField nomField;
     @FXML
-    private TextArea cinField;
+    private TextField prenomField;
     @FXML
-    private TextArea nomField;
-    @FXML
-    private Button signupBtn;
-    @FXML
-    private TextArea prenomField;
-    @FXML
-    private TextArea numField;
-    @FXML
-    private TextArea emailField;
-    @FXML
-    private TextArea passwordField;
-    @FXML
-    private Text loginBtn;
+    private TextField numField;
     @FXML
     private DatePicker dateField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField passwordField;
+    @FXML
+    private Button editBtn;
+    @FXML
+    private Button saveBtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+        cinField.setDisable(true);
+        nomField.setDisable(true);
+        prenomField.setDisable(true);
+        numField.setDisable(true);
+        dateField.setDisable(true);
+        emailField.setDisable(true);
+        passwordField.setDisable(true);
 
-    private void backToLogin(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/login.fxml"));
-            Parent root = loader.load();
-            LoginController loginController = loader.getController();
+        user = utilisateur.current_user;
+        cinField.setText(Integer.toString(user.getCin()));
+        nomField.setText(user.getNom());
+        prenomField.setText(user.getPrenom());
+        numField.setText(user.getNum());
+        emailField.setText(user.getMail());
+        passwordField.setText(user.getPassword());
+        dateField.setValue(user.getDate_naissance().toLocalDate());
 
-            Stage currentStage = (Stage) s.getScene().getWindow();
-            currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Login");
-            currentStage.show();
-        } catch (IOException e) {
-            showAlert("Failed to load login.fxm");
-            System.out.println("Failed to load login.fxml");
-        }
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Error");
-        alert.setContentText(message);//set message text
-        alert.showAndWait();
+        saveBtn.setDisable(true);
     }
 
     @FXML
-    private void signupAction(ActionEvent event) {
+    private void edit(ActionEvent event) {
+        cinField.setDisable(false);
+        nomField.setDisable(false);
+        prenomField.setDisable(false);
+        numField.setDisable(false);
+        dateField.setDisable(false);
+        emailField.setDisable(false);
+        passwordField.setDisable(false);
+
+        editBtn.setDisable(true);
+        saveBtn.setDisable(false);
+    }
+
+    @FXML
+    private void save(ActionEvent event) {
+        cinField.setDisable(true);
+        nomField.setDisable(true);
+        prenomField.setDisable(true);
+        numField.setDisable(true);
+        dateField.setDisable(true);
+        emailField.setDisable(true);
+        passwordField.setDisable(true);
+
+        editBtn.setDisable(false);
+        saveBtn.setDisable(true);
+
         String cin = cinField.getText();
         String nom = nomField.getText();
         String prenom = prenomField.getText();
@@ -109,7 +109,6 @@ public class SignController implements Initializable {
 
         LocalDate date_naissance = dateField.getValue();
 
-        //Check fields
         if (nom == null || nom.trim().isEmpty()) {
             showAlert("Field 'nom' should not contain a null value.");
             return;
@@ -226,37 +225,27 @@ public class SignController implements Initializable {
             return;
         }
 
-        utilisateur newutilisateur = new utilisateur(Integer.parseInt(cin), prenom, nom, num, email, 0, password, Date.valueOf(date_naissance));
+        //Check if the new Email or CIN is used
+        utilisateur user1, user2;
+        user1 = new serviceUser().getUserByEmail(email);
+        user2 = new serviceUser().getUserByCin(cin);
 
-        //tlawej 3ala user bel mail w el pass ken matl9ahech a3mel signup sinon alert +return
-        //...
-        if (new serviceUser().getUserByEmail(email) == null && new serviceUser().getUserByCin(cin) == null) {
-            new serviceUser().ajouter(newutilisateur);
+        if ((user1 == null || user1.getId_user() == user.getId_user()) && (user2 == null || user2.getCin() == user.getCin())) {
+            utilisateur updatedUser = new utilisateur(Integer.parseInt(cin), prenom, nom, num, email, 0, password, Date.valueOf(date_naissance));
+            updatedUser.setId_user(user.getId_user());
+            new serviceUser().modifier(updatedUser);
+
         } else {
-            showAlert("email et cin existe deja ");
-            return;
+            showAlert("Email or CIN exist");
         }
 
-        //redirect to dahsboard
-        //... }
     }
 
-    @FXML
-    private void log(MouseEvent event) {
-          try {
-            Parent root =  FXMLLoader.load(getClass().getResource("login.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("login");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

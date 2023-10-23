@@ -10,9 +10,8 @@ import edu.esprit.pi.services.serviceUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,46 +24,35 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import static sun.security.jgss.GSSUtil.login;
-import sun.security.util.Password;
 
 /**
  * FXML Controller class
  *
  * @author aziz
  */
-public class SignController implements Initializable {
+public class AdduserController implements Initializable {
 
-    @FXML
-    private ImageView imglogo;
     @FXML
     private AnchorPane s;
     @FXML
-    private TextArea cinField;
+    private TextArea cinajout;
     @FXML
-    private TextArea nomField;
+    private TextArea nomajout;
     @FXML
-    private Button signupBtn;
+    private Button adduser;
     @FXML
-    private TextArea prenomField;
+    private TextArea prenomajout;
     @FXML
-    private TextArea numField;
+    private TextArea numajout;
     @FXML
-    private TextArea emailField;
+    private TextArea emailajout;
     @FXML
-    private TextArea passwordField;
+    private TextArea passwordajout;
     @FXML
-    private Text loginBtn;
-    @FXML
-    private DatePicker dateField;
+    private DatePicker dateajout;
 
     /**
      * Initializes the controller class.
@@ -74,19 +62,27 @@ public class SignController implements Initializable {
         // TODO
     }
 
-    private void backToLogin(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/login.fxml"));
-            Parent root = loader.load();
-            LoginController loginController = loader.getController();
+    @FXML
+    private void adduserAction(ActionEvent event) {
 
-            Stage currentStage = (Stage) s.getScene().getWindow();
-            currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Login");
-            currentStage.show();
-        } catch (IOException e) {
-            showAlert("Failed to load login.fxm");
-            System.out.println("Failed to load login.fxml");
+        String cin = cinajout.getText();
+        String nom = nomajout.getText();
+        String prenom = prenomajout.getText();
+        String num = numajout.getText();
+        String date_naissance = String.valueOf(dateajout.getValue());
+        String email = emailajout.getText();
+        String password = passwordajout.getText();
+
+        if (cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || num.isEmpty() || date_naissance.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please Fill All DATA");
+            alert.showAndWait();
+
+        } else {
+
+            insert();
+
         }
     }
 
@@ -97,17 +93,17 @@ public class SignController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
-    private void signupAction(ActionEvent event) {
-        String cin = cinField.getText();
-        String nom = nomField.getText();
-        String prenom = prenomField.getText();
+    private void insert() {
 
-        String num = numField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
+        String cin = cinajout.getText();
+        String nom = nomajout.getText();
+        String prenom = prenomajout.getText();
 
-        LocalDate date_naissance = dateField.getValue();
+        String num = numajout.getText();
+        String email = emailajout.getText();
+        String password = passwordajout.getText();
+
+        LocalDate date_naissance = dateajout.getValue();
 
         //Check fields
         if (nom == null || nom.trim().isEmpty()) {
@@ -231,32 +227,23 @@ public class SignController implements Initializable {
         //tlawej 3ala user bel mail w el pass ken matl9ahech a3mel signup sinon alert +return
         //...
         if (new serviceUser().getUserByEmail(email) == null && new serviceUser().getUserByCin(cin) == null) {
-            new serviceUser().ajouter(newutilisateur);
+            try {
+                new serviceUser().ajouter(newutilisateur);
+                Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+                
+                Stage stage = new Stage();
+                stage.setTitle("login");
+                stage.setScene(new Scene(root));
+                
+                stage.show();
+                emailajout.getScene().getWindow().hide();
+            } catch (IOException ex) {
+                Logger.getLogger(AdduserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-            showAlert("email et cin existe deja ");
+            showAlert("email ou cin existe deja ");
             return;
         }
-
-        //redirect to dahsboard
-        //... }
-    }
-
-    @FXML
-    private void log(MouseEvent event) {
-          try {
-            Parent root =  FXMLLoader.load(getClass().getResource("login.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("login");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 }

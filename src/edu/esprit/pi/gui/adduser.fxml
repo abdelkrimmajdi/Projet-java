@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.AdduserController">
+   <children>
+      <AnchorPane fx:id="s" prefHeight="617.0" prefWidth="510.0" style="-fx-background-color: white;">
+         <children>
+            <TextArea fx:id="cinajout" layoutX="67.0" layoutY="111.0" prefHeight="48.0" prefWidth="153.0" promptText="Cin" style="-fx-background-color: #262626;" />
+            <TextArea fx:id="nomajout" layoutX="238.0" layoutY="111.0" prefHeight="48.0" prefWidth="153.0" promptText="Nom" style="-fx-background-color: #262626;" />
+            <Label layoutX="115.0" layoutY="32.0" prefHeight="58.0" prefWidth="280.0" text="ADD USER">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="adduser" layoutX="140.0" layoutY="509.0" mnemonicParsing="false" onAction="#adduserAction" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="add user" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+            <TextArea fx:id="prenomajout" layoutX="67.0" layoutY="176.0" prefHeight="48.0" prefWidth="153.0" promptText="Prenom" style="-fx-background-color: #262626;" />
+            <TextArea fx:id="numajout" layoutX="244.0" layoutY="176.0" prefHeight="48.0" prefWidth="153.0" promptText="Num_tel" style="-fx-background-color: #262626;" />
+            <TextArea fx:id="emailajout" layoutX="67.0" layoutY="311.0" prefHeight="48.0" prefWidth="326.0" promptText="Email" style="-fx-background-color: #262626;" />
+            <TextArea fx:id="passwordajout" layoutX="67.0" layoutY="382.0" prefHeight="48.0" prefWidth="326.0" promptText="Password" style="-fx-background-color: #262626;" />
+            <DatePicker fx:id="dateajout" layoutX="63.0" layoutY="254.0" prefHeight="31.0" prefWidth="335.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
