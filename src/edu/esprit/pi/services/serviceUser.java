@@ -5,6 +5,7 @@
  */
 package edu.esprit.pi.services;
 
+import edu.esprit.pi.entities.Reclamation;
 import java.util.List;
 import edu.esprit.pi.entities.utilisateur;
 import java.sql.Connection;
@@ -114,6 +115,7 @@ public class serviceUser implements IService<utilisateur> {
     @Override
     public List<utilisateur> getAll() {
         String user = "SELECT * FROM `utilisateur`";
+<<<<<<< HEAD
         ArrayList<utilisateur> users = new ArrayList();
         Statement stm;
         try {
@@ -141,6 +143,26 @@ public class serviceUser implements IService<utilisateur> {
 
         }
         return users;
+=======
+      ArrayList<utilisateur> reclamation = new ArrayList();
+    Statement stm;
+    try {
+        stm = this.cnx.createStatement();
+    
+    
+        ResultSet rs=  stm.executeQuery(user);
+    while (rs.next()){
+        Reclamation r = new Reclamation();
+        r.setId_reclamation(rs.getInt(1));
+        r.setNom(rs.getString(2));
+        r.setPrenom(rs.getString(3));
+        r.setNum(rs.getString(4));
+        r.setEmail(rs.getString(5));
+        r.setType(rs.getString(6));
+        r.setDescription(rs.getString(7));
+        
+        reclamation.add(r);
+>>>>>>> 4681f041123f575ba04b6a58cb145c8f574c256c
     }
 
     //Search userByEmail

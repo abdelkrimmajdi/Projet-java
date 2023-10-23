@@ -60,6 +60,8 @@ public class ModifierTournoiController implements Initializable {
     private TableColumn<Tournoi, Integer> clNbr_Equipes;
     @FXML
     private TableColumn<Tournoi, Date> clDates;
+    @FXML
+    private TextField txtnom_tournoi;
 
     /**
      * Initializes the controller class.
@@ -82,7 +84,6 @@ public class ModifierTournoiController implements Initializable {
         
     }    
     
-    @FXML
     public void update(){
         clID_tournoi.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_tournoi"));
         clID_terrain.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_terrain"));
@@ -102,7 +103,7 @@ public class ModifierTournoiController implements Initializable {
     @FXML
     private void modifier(ActionEvent event) {
         ServiceTournoi tour = new ServiceTournoi();
-            if (txtAdresse.getText().isEmpty() || TextListEquipe.getText().isEmpty() || txtId_tournoi.getText().isEmpty() ) {
+            if (txtAdresse.getText().isEmpty() ||txtnom_tournoi.getText().isEmpty() || TextListEquipe.getText().isEmpty() || txtId_tournoi.getText().isEmpty() ) {
             Alert a = new Alert(Alert.AlertType.WARNING);
             a.setContentText("Veuillez saisir tous les champs ");
             a.setHeaderText(null);
@@ -112,10 +113,11 @@ public class ModifierTournoiController implements Initializable {
                 String adresse=txtAdresse.getText();
                 String equipes=TextListEquipe.getText();
                 int nbr_equipe=SpNbrEquipe.getValue();
+                String nom_tournoi=txtnom_tournoi.getText();
                 LocalDate date = DDate_tournoi.getValue();
                 Date date_tournoi = Date.valueOf(date);
                 int id_tournoi= Integer.parseInt(txtId_tournoi.getText());
-                Tournoi t = new Tournoi(id_tournoi,equipes,adresse,nbr_equipe,date_tournoi);
+                Tournoi t = new Tournoi(id_tournoi,nom_tournoi,equipes,adresse,nbr_equipe,date_tournoi);
                 tour.modifier(t);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

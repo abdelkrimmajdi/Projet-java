@@ -59,6 +59,8 @@ public class AjouterTournoiController implements Initializable {
     private TableColumn<Tournoi, Integer> clNbr_Equipes;
     @FXML
     private TableColumn<Tournoi, Date> clDates;
+    @FXML
+    private TextField txtnom_tournoi;
     
     
 
@@ -82,7 +84,6 @@ public class AjouterTournoiController implements Initializable {
         tableDB1.setItems(observableTournoi);
     }    
     
-    @FXML
     public void update(){
         clID_tournoi.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_tournoi"));
         clID_terrain.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_terrain"));
@@ -102,7 +103,7 @@ public class AjouterTournoiController implements Initializable {
     @FXML
     private void ajouter(ActionEvent event) {
         ServiceTournoi tour = new ServiceTournoi();
-        if(txtAdresse.getText().isEmpty() || TextListEquipe.getText().isEmpty()){ 
+        if(txtAdresse.getText().isEmpty() ||txtnom_tournoi.getText().isEmpty() || TextListEquipe.getText().isEmpty()){ 
             Alert a = new Alert(Alert.AlertType.WARNING);
             a.setContentText("Veuillez saisir tous les champs ");
             a.setHeaderText(null);
@@ -112,9 +113,10 @@ public class AjouterTournoiController implements Initializable {
         String adresse = txtAdresse.getText();
         String equipes = TextListEquipe.getText();
         int nbr_equipe = SpNbrEquipe.getValue();
+        String nom_tournoi=txtnom_tournoi.getText();
         LocalDate date = DDate_tournoi.getValue();
         Date date_tournoi = Date.valueOf(date);
-        Tournoi t = new Tournoi(equipes,adresse,nbr_equipe,date_tournoi);
+        Tournoi t = new Tournoi(nom_tournoi,equipes,adresse,nbr_equipe,date_tournoi);
         tour.ajouter(t);
         
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

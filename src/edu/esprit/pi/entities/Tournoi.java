@@ -14,8 +14,7 @@ import java.sql.Date;
 public class Tournoi {
     private int id_tournoi;
     private int id_terrain;
-    
-  
+    private String nom_tournoi;
     private String equipes;
     private String adresse;
     private int nbr_equipe;
@@ -24,31 +23,41 @@ public class Tournoi {
     public Tournoi() {
     }
 
-    public Tournoi(String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
+    public Tournoi(String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
+        this.nom_tournoi = nom_tournoi;
         this.equipes = equipes;
         this.adresse = adresse;
         this.nbr_equipe = nbr_equipe;
         this.date_tournoi = date_tournoi;
     }
 
-    public Tournoi(int id_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
+    public Tournoi(int id_tournoi, String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
         this.id_tournoi = id_tournoi;
+        this.nom_tournoi = nom_tournoi;
         this.equipes = equipes;
         this.adresse = adresse;
         this.nbr_equipe = nbr_equipe;
         this.date_tournoi = date_tournoi;
     }
-    
-    public Tournoi(int id_tournoi, int id_terrain, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
+
+    public Tournoi(int id_tournoi, int id_terrain, String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
         this.id_tournoi = id_tournoi;
         this.id_terrain = id_terrain;
+        this.nom_tournoi = nom_tournoi;
         this.equipes = equipes;
         this.adresse = adresse;
         this.nbr_equipe = nbr_equipe;
         this.date_tournoi = date_tournoi;
     }
-    
 
+    public String getNom_tournoi() {
+        return nom_tournoi;
+    }
+
+    public void setNom_tournoi(String nom_tournoi) {
+        this.nom_tournoi = nom_tournoi;
+    }
+    
     
 
     public String getEquipes() {
@@ -100,16 +109,11 @@ public class Tournoi {
     public void setNbr_equipe(int nbr_equipe) {
         this.nbr_equipe = nbr_equipe;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Tournoi{" + "id_tournoi=" + id_tournoi + ", equipes=" + equipes + ", id_terrain=" + id_terrain + ", adresse=" + adresse + ", nbr_equipe=" + nbr_equipe + ", date_tournoi=" + date_tournoi + '}';
+        return "Tournoi{" + "id_tournoi=" + id_tournoi + ", id_terrain=" + id_terrain + ", nom_tournoi=" + nom_tournoi + ", equipes=" + equipes + ", adresse=" + adresse + ", nbr_equipe=" + nbr_equipe + ", date_tournoi=" + date_tournoi + '}';
     }
-
-    
-
     
     @Override
     public int hashCode() {
