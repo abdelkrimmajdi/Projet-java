@@ -133,7 +133,7 @@ public class LoginController implements Initializable {
                     }
                 } else {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
 
                         Stage stage = new Stage();
                         stage.setTitle("sign Up");

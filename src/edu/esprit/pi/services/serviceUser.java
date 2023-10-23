@@ -91,7 +91,7 @@ public class serviceUser implements IService<utilisateur> {
             ResultSet us = stm.executeQuery(user);
 
             if (us.next()) {
-                utilisateur u = new uktilisateur();
+                utilisateur u = new utilisateur();
                 u.setId_user(us.getInt("id_user"));
                 u.setCin(us.getInt("cin"));
                 u.setNom(us.getString("nom"));

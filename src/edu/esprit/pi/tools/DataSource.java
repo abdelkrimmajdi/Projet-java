@@ -18,11 +18,7 @@ public class DataSource {
     private Connection cnx;
     private static DataSource instance;
     
-<<<<<<< HEAD
-    private String url = "jdbc:mysql://localhost:3306/projet";
-=======
-    private String url = "jdbc:mysql://localhost:3306/pidev";
->>>>>>> a93d2bb7c3281a4268935b1e8e015ed1d0a4edd8
+    private String url = "jdbc:mysql://localhost:3306/projet";    
     private String user = "root";
     private String password = "";
     
