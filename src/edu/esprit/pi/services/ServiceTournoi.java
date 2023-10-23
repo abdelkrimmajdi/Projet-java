@@ -46,15 +46,16 @@ public ServiceTournoi(){
         }
         
         // Utilisez les valeurs récupérées dans la requête d'insertion
-        String insertQuery = "INSERT INTO tournoi (id_terrain, equipes, adresse, nbr_equipe, date_tournoi) " +
-                            "VALUES (?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO tournoi (id_terrain, nom_tournoi, equipes, adresse, nbr_equipe, date_tournoi) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)";
         
         PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
         insertStmt.setInt(1, idTerrain);
-        insertStmt.setString(2, t.getEquipes());
-        insertStmt.setString(3, t.getAdresse());
-        insertStmt.setInt(4, t.getNbr_equipe());
-        insertStmt.setDate(5, t.getDate_tournoi());
+        insertStmt.setString(2, t.getNom_tournoi());
+        insertStmt.setString(3, t.getEquipes());
+        insertStmt.setString(4, t.getAdresse());
+        insertStmt.setInt(5, t.getNbr_equipe());
+        insertStmt.setDate(6, t.getDate_tournoi());
         
         
 
@@ -70,7 +71,7 @@ public ServiceTournoi(){
     @Override
     public void modifier(Tournoi t) {
     try {
-        String req = "UPDATE tournoi SET equipes='" + t.getEquipes() + "', adresse='" + t.getAdresse() +
+        String req = "UPDATE tournoi SET nom_tournoi='" + t.getNom_tournoi() + "',equipes='" + t.getEquipes() + "', adresse='" + t.getAdresse() +
                      "', nbr_equipe='" + t.getNbr_equipe() +  "', date_tournoi='" + t.getDate_tournoi() +  "' WHERE id_tournoi=" + t.getId_tournoi();
         Statement stm = cnx.createStatement();
         stm.executeUpdate(req);
@@ -105,6 +106,7 @@ public ServiceTournoi(){
                 tournoi = new Tournoi();
                 tournoi.setId_tournoi(rs.getInt("id_tournoi"));
                 tournoi.setId_terrain(rs.getInt("id_terrain"));
+                tournoi.setNom_tournoi(rs.getString("nom_tournoi"));
                 tournoi.setEquipes(rs.getString("Equipe"));
                 tournoi.setNbr_equipe(rs.getInt("Nombre equipe"));
                 tournoi.setAdresse(rs.getString("Adresse"));
@@ -130,10 +132,11 @@ public ServiceTournoi(){
             Tournoi p = new Tournoi();
             p.setId_tournoi(rs.getInt(1));
             p.setId_terrain(rs.getInt(2));
-            p.setEquipes(rs.getString(3));
-            p.setAdresse(rs.getString(4));
-            p.setNbr_equipe(rs.getInt(5));
-            p.setDate_tournoi(rs.getDate(6));
+            p.setNom_tournoi(rs.getString(3));
+            p.setEquipes(rs.getString(4));
+            p.setAdresse(rs.getString(5));
+            p.setNbr_equipe(rs.getInt(6));
+            p.setDate_tournoi(rs.getDate(7));
         
         Tournoi.add(p);
         }
