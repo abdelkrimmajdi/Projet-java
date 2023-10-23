@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="799.0" prefWidth="1152.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.HistoriquereclController">
+   <children>
+      <TextField fx:id="etatad" layoutX="45.0" layoutY="277.0" promptText="Etat" />
+      <TextField fx:id="repdescr" layoutX="45.0" layoutY="348.0" prefHeight="179.0" prefWidth="187.0" promptText="Description" />
+      <Button fx:id="reponse" layoutX="80.0" layoutY="589.0" mnemonicParsing="false" onAction="#reponserecl" prefHeight="31.0" prefWidth="152.0" text="Repondre" />
+      <Button fx:id="supprimerre" layoutX="249.0" layoutY="589.0" mnemonicParsing="false" onAction="#supprimerreclamatio" prefHeight="31.0" prefWidth="152.0" text="Supprimer" />
+      <TableView fx:id="tablerec" layoutX="325.0" layoutY="87.0" prefHeight="410.0" prefWidth="798.0">
+        <columns>
+            <TableColumn fx:id="nul" prefWidth="75.0" text="Numero" />
+            <TableColumn fx:id="eml" prefWidth="138.0" text="Email" />
+            <TableColumn fx:id="desr" prefWidth="159.0" text="Description" />
+            <TableColumn fx:id="eta" prefWidth="75.0" text="Etat" />
+            <TableColumn fx:id="typp" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="datee" prefWidth="125.0" text="Date" />
+        </columns>
+      </TableView>
+      <TextField fx:id="idrech" layoutX="458.0" layoutY="21.0" promptText="Id reclamation a chercher" />
+      <Button layoutX="645.0" layoutY="21.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="31.0" prefWidth="100.0" text="Rechercher" />
+      <Button layoutX="745.0" layoutY="21.0" mnemonicParsing="false" onAction="#Tri" prefHeight="31.0" prefWidth="100.0" text="Tri" />
+      <Button fx:id="gmr" layoutX="427.0" layoutY="589.0" mnemonicParsing="false" onAction="#gerermesreponse" prefHeight="31.0" prefWidth="169.0" text="Gerer mes reponse" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/logo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="930.0" layoutY="627.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/380337253_671491991622160_4104764925505569718_n.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
