@@ -20,22 +20,24 @@ import javafx.stage.Stage;
  *
  * @author hamma
  */
-public class Modifier_M_Window extends Application {
+public class MainTournoi extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("ModifierMatch.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Tournoi.fxml"));
         
             Scene scene = new Scene(root);
         
-            primaryStage.setTitle("Modifier Match");
+            primaryStage.setTitle("Gérer vos Tournoi");
             primaryStage.setScene(scene);
             primaryStage.show();
         }catch(IOException ex){
             System.out.println(ex.getMessage());
         }
     }
+
+
     /**
      * @param args the command line arguments
      */

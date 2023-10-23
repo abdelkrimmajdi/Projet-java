@@ -5,6 +5,7 @@
  */
 package edu.esprit.pi.services;
 
+import edu.esprit.pi.entities.Reclamation;
 import java.util.List;
 import edu.esprit.pi.entities.utilisateur;
 import java.sql.Connection;
@@ -93,31 +94,7 @@ public class serviceUser implements IService<utilisateur> {
     public List<utilisateur> getAll() {
         String user = "SELECT * FROM `utilisateur`";
       ArrayList<utilisateur> reclamation = new ArrayList();
-    Statement stm;
-    try {
-        stm = this.cnx.createStatement();
-    
-    
-        ResultSet us=  stm.executeQuery(user);
-    while (us.next()){
-        Reclamation r = new Reclamation();
-        r.setId_reclamation(rs.getInt(1));
-        r.setNom(rs.getString(2));
-        r.setPrenom(rs.getString(3));
-        r.setNum(rs.getString(4));
-        r.setEmail(rs.getString(5));
-        r.setType(rs.getString(6));
-        r.setDescription(rs.getString(7));
-        
-        reclamation.add(r);
-    }
-        
-        
-    } catch (SQLException ex) {
-    
-        System.out.println(ex.getMessage());
-    
-    }
+
     return reclamation; 
     }
 
