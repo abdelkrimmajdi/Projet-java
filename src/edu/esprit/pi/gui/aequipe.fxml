@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="959.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjoueurController">
+   <children>
+      <TextField fx:id="eqnom" layoutX="122.0" layoutY="64.0" />
+      <ComboBox fx:id="eqclm" layoutX="330.0" layoutY="172.0" prefWidth="150.0" />
+      <Spinner fx:id="eqnb" layoutX="576.0" layoutY="64.0" />
+      <TableView fx:id="equipees" layoutX="89.0" layoutY="278.0" prefHeight="200.0" prefWidth="561.0">
+        <columns>
+          <TableColumn fx:id="ideqqq" prefWidth="118.0" text="ID EQUIPE" />
+          <TableColumn fx:id="nbj" prefWidth="148.0" text="NOMBRE JOUEUR" />
+            <TableColumn fx:id="coulrm" minWidth="0.0" prefWidth="161.0" text="COULEUR MAILLOT" />
+            <TableColumn fx:id="noeq" minWidth="0.0" prefWidth="133.0" text="NOM EQUIPE" />
+        </columns>
+      </TableView>
+      <Button fx:id="ajouterequipee" layoutX="708.0" layoutY="304.0" mnemonicParsing="false" onAction="#eqajouterr" text="AJOUTER" textFill="#07e70b" underline="true" />
+      <Button layoutX="708.0" layoutY="396.0" mnemonicParsing="false" onAction="#eqajour" prefHeight="31.0" prefWidth="82.0" text="MAJ" textFill="#07e70b" />
+      <Text fill="#dd1010" layoutX="146.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOM EQUIPE">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#dd1010" layoutX="317.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COULEUR MAILLOT">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#dd1010" layoutX="566.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NB JOUEURS EQUIPE">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

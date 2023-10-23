@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/C:/Users/benou/Desktop/ProjetPI/Takwira/src/edu/esprit/pi/tools/DataSource.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/SupprimerMatch.fxml</file>
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/ModifierTournoi.fxml</file>
             <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Supprimer_T_Window.java</file>
@@ -26,6 +29,7 @@
 =======
             <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/Takwira.java</file>
 >>>>>>> c367014ea8be332c22d912cfacb536d32a87ca20
+>>>>>>> 9c2e6d75640c5097a6ec3d6d8a082f35776bbff0
         </group>
     </open-files>
 </project-private>
