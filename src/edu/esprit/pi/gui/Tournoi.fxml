@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="877.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.esprit.pi.gui.TournoiController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="899.0">
+         <children>
+            <Label layoutX="591.0" layoutY="23.0" prefHeight="51.0" prefWidth="252.0" text="Gestion Tournoi" textAlignment="CENTER">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="632.0" layoutY="129.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="65.0" prefWidth="170.0" text="ajouter" />
+            <Button layoutX="632.0" layoutY="253.0" mnemonicParsing="false" onAction="#modifier" prefHeight="65.0" prefWidth="170.0" text="Modifier" />
+            <Button layoutX="635.0" layoutY="375.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="65.0" prefWidth="170.0" text="Supprimer" />
+            <Label layoutX="707.0" layoutY="211.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
+            <Label layoutX="707.0" layoutY="331.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
+            <Label layoutX="708.0" layoutY="462.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
+            <Button layoutX="635.0" layoutY="505.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" text="Rechercher" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-6.0" prefHeight="630.0" prefWidth="503.0" style="-fx-background-color: #262626;">
+         <children>
+            <ImageView fx:id="imglogo" fitHeight="306.0" fitWidth="355.0" layoutX="85.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/logo.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
