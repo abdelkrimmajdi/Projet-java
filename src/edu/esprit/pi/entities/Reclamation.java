@@ -14,98 +14,107 @@ import java.sql.Date;
 public class Reclamation {
     private int id_reclamation;
     private int id_utilisateur;
-    private String prenom;
-    private String nom;
+
+
     private String num;
     private String email;
     private String type;
     private String description;
-    private Date date;
-    
-    
+    private String date;
+    private String etat;   
+    private String cin;
 
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
     public Reclamation() {
     }
 
-    public Reclamation(String prenom, String nom, String num, String email, String type, String description) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.num = num;
-        this.email = email;
+    public Reclamation(String type, String description, String cin) {
+        this.type = type;
+        this.description = description;
+        this.cin = cin;
+    }
+
+ 
+    public Reclamation(String type, String description) {
         this.type = type;
         this.description = description;
     }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getDescription() {
-        return description;
+    public int getId_reclamation() {
+        return id_reclamation;
     }
 
     public void setId_reclamation(int id_reclamation) {
         this.id_reclamation = id_reclamation;
     }
 
+    public int getId_utilisateur() {
+        return id_utilisateur;
+    }
+
     public void setId_utilisateur(int id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getNum() {
+        return num;
     }
 
     public void setNum(String num) {
         this.num = num;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-  
-
-   
-    public String toString() {
-        return "Reclamation{" +
-                "id_reclamation=" + id_reclamation +
-                ", prenom='" + prenom + '\'' +
-                ", nom='" + nom + '\'' +
-                ", nom='" + num + '\'' +
-                ", nom='" + email + '\'' +
-                ", description='" + description + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+    public String getDate() {
+        return date;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    @Override
+    public String toString() {
+        return "Reclamation{" + "id_reclamation=" + id_reclamation + ", id_utilisateur=" + id_utilisateur + ", num=" + num + ", email=" + email + ", type=" + type + ", description=" + description + ", date=" + date + ", etat=" + etat + '}';
+    }
+  
+    
      public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -123,9 +132,7 @@ public class Reclamation {
         return true;
     }
 
-    public int getId_reclamation() {
-        return id_reclamation;
-    }
+   
 
    
     

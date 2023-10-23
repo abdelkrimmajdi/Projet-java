@@ -4,20 +4,28 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/SignUpController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/IService.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/tools/DataSource.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/signInController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/serviceUser.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/entities/utilisateur.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/SupprimerMatch.fxml</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/ModifierTournoi.fxml</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Supprimer_T_Window.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/AjouterTournoi.fxml</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Ajouter.fxml</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Supprimer_M_Window.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/Test.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/ModifierTournoiController.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/ModifierMatchController.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Modifier_M_Window.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/SupprimerMatchController.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Ajouter_M_Window.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/AjouterTournoiController.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/SupprimerTournoi.fxml</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/AjouterController.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/SupprimerTournoiController.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Modifier_T_Window.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/Ajouter_T_Window.java</file>
+            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/gui/ModifierMatch.fxml</file>
 =======
-            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/entities/Match.java</file>
-            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/services/ServiceMatch.java</file>
-            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/services/ServiceTournoi.java</file>
-            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/entities/Tournoi.java</file>
-            <file>file:/C:/Users/hamma/OneDrive/Bureau/Projet%20PIdev/Takwira/src/edu/esprit/pi/entities/equipe.java</file>
->>>>>>> 8773f98302fc9bcda6c795b4b748ad89ed1c8587
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/Takwira.java</file>
+>>>>>>> c367014ea8be332c22d912cfacb536d32a87ca20
         </group>
     </open-files>
 </project-private>
