@@ -6,6 +6,8 @@
 package edu.esprit.pi.gui;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,16 +22,16 @@ import javafx.stage.Stage;
  *
  * @author hamma
  */
-public class Ajouter_M_Window extends Application {
+public class Main_fares extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+    public void start(Stage primaryStage) {
+       try{
+            Parent root = FXMLLoader.load(getClass().getResource("fares.fxml"));
         
             Scene scene = new Scene(root);
         
-            primaryStage.setTitle("Ajouter Match");
+            primaryStage.setTitle("Gérer vos Matchs");
             primaryStage.setScene(scene);
             primaryStage.show();
         }catch(IOException ex){

@@ -130,7 +130,7 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
     public List<Reponse> afficher (String cin){
          ArrayList<Reponse> reponse = new ArrayList<>();
     try {
-        String req = "SELECT re.* FROM reponse re JOIN recl r ON re.id_reclamation = r.id_reclamation JOIN user u ON r.id_utilisateur = u.id_utilisateur WHERE u.cin =?" ;
+        String req = "SELECT re.* FROM reponse re JOIN recl r ON re.id_reclamation = r.id_reclamation JOI utilisateur u ON r.id_utilisateur = u.id_user WHERE u.cin =?" ;
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
         preparedStatement.setString(1, cin);
         ResultSet rs = preparedStatement.executeQuery();
