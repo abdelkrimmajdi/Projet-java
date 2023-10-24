@@ -97,6 +97,8 @@ public class SignController implements Initializable {
         alert.showAndWait();
     }
 
+    
+    private utilisateur user;
     @FXML
     private void signupAction(ActionEvent event) {
         String cin = cinField.getText();
@@ -239,6 +241,23 @@ public class SignController implements Initializable {
 
         //redirect to dahsboard
         //... }
+        
+        
+       /*  MailSender mailSender = new MailSender(Constants.email, Constants.password, this.user.getMail());
+        String object = this.mailObject.getText();
+        String text = this.mailText.getText();
+        mailSender.send(object, text);
+        App.showAlert("Success", "The message has been successfully sent!", Alert.AlertType.CONFIRMATION);
+        this.user.setSent(true);
+
+        Stage oldStageMail = (Stage) this.signupBtn.getScene().getWindow();
+        oldStageMail.close();*/
+        
+        
+        
+        
+        
+        
     }
 
     @FXML

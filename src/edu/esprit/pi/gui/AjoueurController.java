@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.services.ServiceEquipe;
 
 /**
  * FXML Controller class

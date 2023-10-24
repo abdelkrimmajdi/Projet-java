@@ -5,8 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="506.0" prefWidth="623.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.esprit.pi.gui.AcceuilController">
+<AnchorPane id="AnchorPane" prefHeight="506.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.AcceuilController">
    <children>
       <AnchorPane prefHeight="506.0" prefWidth="187.0" style="-fx-background-color: #262626;">
          <children>
@@ -16,7 +15,8 @@
             <Button fx:id="gestionrequi" layoutX="5.0" layoutY="253.0" mnemonicParsing="false" onAction="#gestionrequi" prefHeight="31.0" prefWidth="162.0" text="Gestion equipe " />
             <Button fx:id="gestionrematch" layoutX="6.0" layoutY="306.0" mnemonicParsing="false" onAction="#gestionrematch" prefHeight="31.0" prefWidth="162.0" text="Gestion match" />
             <Button fx:id="gestionreterr" layoutX="6.0" layoutY="354.0" mnemonicParsing="false" onAction="#gestionreterr" prefHeight="31.0" prefWidth="162.0" text="Gestion terrain" />
-            <Button fx:id="profile" layoutX="3.0" layoutY="407.0" mnemonicParsing="false" onAction="#profile" prefHeight="31.0" prefWidth="162.0" text="profile" />
+            <Button fx:id="profile" layoutX="6.0" layoutY="400.0" mnemonicParsing="false" onAction="#profile" prefHeight="31.0" prefWidth="162.0" text="profile" />
+            <Button fx:id="dash" layoutX="9.0" layoutY="452.0" mnemonicParsing="false" onAction="#dash" prefHeight="31.0" prefWidth="162.0" text="gestion utilisateur" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="506.0" fitWidth="437.0" layoutX="187.0">

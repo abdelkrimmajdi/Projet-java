@@ -10,7 +10,7 @@ import java.sql.Date;
 /**
  *
  * @author majdiabdelkrim
- */
+ */ 
 public class Reclamation {
     private int id_reclamation;
     private int id_utilisateur;

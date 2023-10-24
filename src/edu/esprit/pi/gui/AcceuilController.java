@@ -5,6 +5,8 @@
  */
 package edu.esprit.pi.gui;
 
+import edu.esprit.pi.entities.utilisateur;
+import edu.esprit.pi.services.serviceUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import static sun.security.jgss.GSSUtil.login;
 
 /**
  * FXML Controller class
@@ -40,6 +43,8 @@ public class AcceuilController implements Initializable {
     private Button gestionreterr;
     @FXML
     private Button profile;
+    @FXML
+    private Button dash;
 
     /**
      * Initializes the controller class.
@@ -105,5 +110,31 @@ public class AcceuilController implements Initializable {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
     }
+
+    @FXML
+    private void dash(ActionEvent event) {
+        
+      if (utilisateur.current_user.getRole() == 1) {
+         try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        dash.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+         
+           
+        }
+}
     
 }
+
+
+
