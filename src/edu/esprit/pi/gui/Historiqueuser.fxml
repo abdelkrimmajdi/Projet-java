@@ -4,42 +4,34 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="763.0" prefWidth="1175.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.HistoriqueuserController">
+<AnchorPane id="AnchorPane" prefHeight="853.0" prefWidth="1287.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.HistoriqueuserController">
    <children>
-      <TableView fx:id="tableuserrec" layoutX="362.0" layoutY="106.0" onMouseClicked="#Select" prefHeight="412.0" prefWidth="690.0">
-        <columns>
-            <TableColumn fx:id="numhra" prefWidth="75.0" text="Numero" />
-            <TableColumn fx:id="emailhra" prefWidth="112.0" text="Email" />
-            <TableColumn fx:id="etathru" prefWidth="75.0" text="Etat" />
-            <TableColumn fx:id="hra" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="deschra" prefWidth="126.0" text="Description" />
-            <TableColumn fx:id="datehru" prefWidth="151.0" text="Date" />
-        </columns>
-      </TableView>
-      <Button layoutX="245.0" layoutY="581.0" mnemonicParsing="false" onAction="#supphra" prefHeight="50.0" prefWidth="155.0" text="Supprimer" />
-      <Button layoutX="422.0" layoutY="581.0" mnemonicParsing="false" onAction="#modihra" prefHeight="50.0" prefWidth="155.0" text="Modifier" />
-      <TextField fx:id="textdehra" layoutX="71.0" layoutY="324.0" prefHeight="187.0" prefWidth="212.0" promptText="Description" />
-      <TextField fx:id="txttyhra" layoutX="71.0" layoutY="269.0" prefHeight="31.0" prefWidth="212.0" promptText="Type" />
-      <ImageView fitHeight="150.0" fitWidth="212.0" layoutX="958.0" layoutY="606.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/380337253_671491991622160_4104764925505569718_n.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/logo.jpg" />
-         </image>
-      </ImageView>
-      <TextField fx:id="txtidhra" layoutX="514.0" layoutY="30.0" promptText="Id reclamation a chercher" />
-      <Button layoutX="701.0" layoutY="30.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="31.0" prefWidth="107.0" text="Rechercher" />
-      <Button layoutX="808.0" layoutY="30.0" mnemonicParsing="false" onAction="#Tri" prefHeight="31.0" prefWidth="107.0" text="Tri" />
-      <Button layoutX="600.0" layoutY="581.0" mnemonicParsing="false" onAction="#Reponseuser" prefHeight="50.0" prefWidth="155.0" text="Gerer les Reponse" />
-      <TextField fx:id="txtcin" layoutX="71.0" layoutY="204.0" prefHeight="31.0" prefWidth="212.0" promptText="Cin" />
-      <Button layoutX="58.0" layoutY="581.0" mnemonicParsing="false" onAction="#Mettreaj" prefHeight="50.0" prefWidth="155.0" text="Mettre a jour" />
-      <Button layoutX="784.0" layoutY="581.0" mnemonicParsing="false" onAction="#Retour" prefHeight="50.0" prefWidth="155.0" text="Retour" />
+      <Button layoutX="16.0" layoutY="594.0" mnemonicParsing="false" onAction="#supphra" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Supprimer" textFill="WHITE" />
+      <Button layoutX="228.0" layoutY="594.0" mnemonicParsing="false" onAction="#modihra" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Modifier" textFill="WHITE" />
+      <TextField fx:id="textdehra" layoutX="196.0" layoutY="274.0" prefHeight="187.0" prefWidth="212.0" promptText="Description" />
+      <TextField fx:id="txttyhra" layoutX="196.0" layoutY="201.0" prefHeight="31.0" prefWidth="212.0" promptText="Type" />
+      <TextField fx:id="txtcin" layoutX="196.0" layoutY="138.0" prefHeight="31.0" prefWidth="212.0" promptText="Cin" />
+      <AnchorPane layoutX="663.0" layoutY="1.0" prefHeight="853.0" prefWidth="690.0" style="-fx-background-color: #262626;">
+         <children>
+            <TableView fx:id="tableuserrec" layoutX="48.0" layoutY="139.0" onMouseClicked="#Select" prefHeight="407.0" prefWidth="615.0">
+              <columns>
+                  <TableColumn fx:id="numhra" prefWidth="75.0" text="Numero" />
+                  <TableColumn fx:id="emailhra" prefWidth="112.0" text="Email" />
+                  <TableColumn fx:id="etathru" prefWidth="75.0" text="Etat" />
+                  <TableColumn fx:id="hra" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="deschra" prefWidth="126.0" text="Description" />
+                  <TableColumn fx:id="datehru" prefWidth="151.0" text="Date" />
+              </columns>
+            </TableView>
+            <TextField fx:id="txtidhra" layoutX="166.0" layoutY="44.0" prefHeight="38.0" prefWidth="187.0" promptText="Id reclamation a chercher" />
+            <Button layoutX="356.0" layoutY="45.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="38.0" prefWidth="107.0" style="-fx-background-color: white;" text="Rechercher" textFill="#262626" />
+            <Button layoutX="466.0" layoutY="45.0" mnemonicParsing="false" onAction="#Tri" prefHeight="38.0" prefWidth="107.0" style="-fx-background-color: white;" text="Tri" textFill="#262626" />
+         </children>
+      </AnchorPane>
+      <Button layoutX="439.0" layoutY="594.0" mnemonicParsing="false" onAction="#Mettreaj" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Mettre a jour" textFill="WHITE" />
+      <Button layoutX="119.0" layoutY="711.0" mnemonicParsing="false" onAction="#Reponseuser" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Gerer les Reponse" textFill="WHITE" />
+      <Button layoutX="360.0" layoutY="711.0" mnemonicParsing="false" onAction="#Retour" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Retour" textFill="WHITE" />
    </children>
 </AnchorPane>

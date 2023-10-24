@@ -29,19 +29,19 @@ public ServiceReclamation(){
     @Override
   public void ajouter(Reclamation t) {
 try {
-    String selectQuery = "SELECT num, email, id_utilisateur FROM user WHERE cin = ?";
+    String selectQuery = "SELECT num,email,id_user FROM utilisateur WHERE cin = ?";
     PreparedStatement selectStmt = cnx.prepareStatement(selectQuery);
     selectStmt.setString(1, t.getCin());
 
     ResultSet resultSet = selectStmt.executeQuery();
 
     if (resultSet.next()) {
-        String insertQuery = "INSERT INTO recl (numero, email, id_utilisateur, type, description, etat) " +
+        String insertQuery = "INSERT INTO recl (numero,email,id_utilisateur,type,description,etat) " +
                             "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
         insertStmt.setString(1, resultSet.getString("num"));
         insertStmt.setString(2, resultSet.getString("email"));
-        insertStmt.setInt(3, resultSet.getInt("id_utilisateur"));
+        insertStmt.setInt(3, resultSet.getInt("id_user"));
         insertStmt.setString(4, t.getType());
         insertStmt.setString(5, t.getDescription());
         insertStmt.setString(6, "en attente");
@@ -54,7 +54,6 @@ try {
     System.out.println(ex.getMessage());
 }
 }
-
     @Override
   public void modifier(Reclamation t) {
     try {
@@ -115,8 +114,6 @@ public Reclamation getOne(int id) {
         ResultSet rs=  stm.executeQuery(req);
     while (rs.next()){
         Reclamation r = new Reclamation();
-        r.setId_reclamation(rs.getInt(1));
-        r.setId_utilisateur(rs.getInt(2));
         r.setNum(rs.getString(3));
         r.setEmail(rs.getString(4));
         r.setType(rs.getString(5));
@@ -139,7 +136,7 @@ public Reclamation getOne(int id) {
     ArrayList<Reclamation> reclamation = new ArrayList<>();
     try {
      
-        String req = "SELECT * FROM recl WHERE id_utilisateur = (SELECT id_utilisateur FROM user WHERE cin = ?)";
+        String req = "SELECT * FROM recl WHERE id_utilisateur = (SELECT id_user FROM utilisateur WHERE cin = ?)";
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
         preparedStatement.setString(1, cin);
         ResultSet rs = preparedStatement.executeQuery();

@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Reclamation {
     private int id_reclamation;
-    private int id_utilisateur;
+    private utilisateur id_utilisateur;
 
 
     private String num;
@@ -53,13 +53,15 @@ public class Reclamation {
         this.id_reclamation = id_reclamation;
     }
 
-    public int getId_utilisateur() {
+    public utilisateur getId_utilisateur() {
         return id_utilisateur;
     }
 
-    public void setId_utilisateur(int id_utilisateur) {
+    public void setId_utilisateur(utilisateur id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
     }
+
+  
 
     public String getNum() {
         return num;

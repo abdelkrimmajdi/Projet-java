@@ -33,34 +33,48 @@ public ServiceMatch(){
     @Override
     public void ajouter(Match t) {
     try {
-        String selectInfoQuery1 = "SELECT id_equipe FROM equipe WHERE nom_equipe = ?";
+        String selectInfoQuery1 = "SELECT id_tournoi FROM tournoi WHERE nom_tournoi = ?";
         
         PreparedStatement infoStmt1 = cnx.prepareStatement(selectInfoQuery1);
-        infoStmt1.setString(1, t.getNom_equipe1()); 
+        infoStmt1.setString(1, t.getNom_tournoi()); 
         
         ResultSet infoResult1 = infoStmt1.executeQuery();
         
-        int idEquipe1 = 0;
+        int idTournoi = 0;
         
         if (infoResult1.next()) {
-            idEquipe1 = infoResult1.getInt("id_equipe");
+            idTournoi = infoResult1.getInt("id_tournoi");
         }
+        
         String selectInfoQuery2 = "SELECT id_equipe FROM equipe WHERE nom_equipe = ?";
         
         PreparedStatement infoStmt2 = cnx.prepareStatement(selectInfoQuery2);
-        infoStmt2.setString(1, t.getNom_equipe2()); 
+        infoStmt2.setString(1, t.getNom_equipe1()); 
         
-        ResultSet infoResult = infoStmt2.executeQuery();
+        ResultSet infoResult2 = infoStmt1.executeQuery();
+        
+        int idEquipe1 = 0;
+        
+        if (infoResult2.next()) {
+            idEquipe1 = infoResult1.getInt("id_equipe");
+        }
+        
+        String selectInfoQuery3 = "SELECT id_equipe FROM equipe WHERE nom_equipe = ?";
+        
+        PreparedStatement infoStmt3 = cnx.prepareStatement(selectInfoQuery3);
+        infoStmt3.setString(1, t.getNom_equipe2()); 
+        
+        ResultSet infoResult3 = infoStmt3.executeQuery();
         
         int idEquipe2 = 0;
         
-        if (infoResult.next()) {
-            idEquipe2 = infoResult.getInt("id_equipe");
+        if (infoResult3.next()) {
+            idEquipe2 = infoResult3.getInt("id_equipe");
         }
 
         // Utilisez les valeurs récupérées dans la requête d'insertion
-        String insertQuery = "INSERT INTO `match` (Resultat, nom_equipe1, id_equipe1, nom_equipe2, id_equipe2) " +
-                            "VALUES (?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO `match` (id_tournoi, nom_tournoi, Resultat, nom_equipe1, id_equipe1, nom_equipe2, id_equipe2) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)";
 
         
         PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
@@ -68,11 +82,13 @@ public ServiceMatch(){
  
 
         // Set the mapped value in the prepared statement
-        insertStmt.setString(1, t.getRes());
-        insertStmt.setString(2, t.getNom_equipe1());
-        insertStmt.setInt(3, idEquipe1);
-        insertStmt.setString(4, t.getNom_equipe2());
-        insertStmt.setInt(5, idEquipe2);
+        insertStmt.setInt(1, idTournoi);
+        insertStmt.setString(2, t.getNom_tournoi());
+        insertStmt.setString(2, t.getRes());
+        insertStmt.setString(3, t.getNom_equipe1());
+        insertStmt.setInt(4, idEquipe1);
+        insertStmt.setString(5, t.getNom_equipe2());
+        insertStmt.setInt(6, idEquipe2);
         
 
         // Exécute la requête d'insertion
@@ -87,7 +103,7 @@ public ServiceMatch(){
     @Override
     public void modifier(Match t) {
     try {
-           String req = "UPDATE `match` SET Resultat='" + t.getRes() + "', nom_equipe1='" + t.getNom_equipe1() + 
+           String req = "UPDATE `match` SET  nom_tournoi='" + t.getNom_tournoi()+ "',Resultat='" + t.getRes() + "', nom_equipe1='" + t.getNom_equipe1() + 
            "', nom_equipe2='" + t.getNom_equipe2() +  "' WHERE id_match = " + t.getId_match();
         Statement stm = cnx.createStatement();
         stm.executeUpdate(req);
@@ -122,6 +138,8 @@ public ServiceMatch(){
             if (rs.next()) {
                 match = new Match();
                 match.setId_match(rs.getInt("id_match"));
+                match.setId_match(rs.getInt("id_tournoi"));
+                match.setNom_tournoi(rs.getString("nom_tournoi"));
                 match.setId_equipe1(rs.getInt("id_equipe1"));
                 match.setId_equipe2(rs.getInt("id_equipe2"));
                 match.setRes(rs.getString("Res"));
@@ -150,11 +168,13 @@ public ServiceMatch(){
             while (rs.next()) {
                 Match match = new Match();
                 match.setId_match(rs.getInt(1));
-                match.setId_equipe1(rs.getInt(2));
-                match.setId_equipe2(rs.getInt(3));
-                match.setRes(rs.getString(4));
-                match.setNom_equipe1(rs.getString(5));
-                match.setNom_equipe2(rs.getString(6));
+                match.setId_tournoi(rs.getInt(2));
+                match.setNom_tournoi(rs.getString(2));
+                match.setId_equipe1(rs.getInt(3));
+                match.setId_equipe2(rs.getInt(4));
+                match.setRes(rs.getString(5));
+                match.setNom_equipe1(rs.getString(6));
+                match.setNom_equipe2(rs.getString(7));
                 
 
                 matches.add(match);

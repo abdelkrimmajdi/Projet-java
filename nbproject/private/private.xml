@@ -3,8 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/entities/utilisateur.java</file>
             <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/services/serviceUser.java</file>
-            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/Test.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/ReponseAdminController.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/HistoriquereclController.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/LoginController.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/login.fxml</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/workshopjdbc/WorkshopJDBC.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/AcceuilController.java</file>
         </group>
     </open-files>
 </project-private>

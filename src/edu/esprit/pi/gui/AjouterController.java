@@ -50,6 +50,8 @@ public class AjouterController implements Initializable {
     private TableColumn<Match, String> clResultat;
     @FXML
     private TableColumn<Match, String> clName_E2;
+    @FXML
+    private TextField txtnom_tournoi;
     /**
      * Initializes the controller class.
      */
@@ -69,7 +71,6 @@ public class AjouterController implements Initializable {
         
     }  
     
-    @FXML
     public void update(){
         clID_match.setCellValueFactory(new PropertyValueFactory<Match,Integer>("id_match"));
         clID_equipe1.setCellValueFactory(new PropertyValueFactory<Match,Integer>("id_equipe1"));
@@ -87,7 +88,7 @@ public class AjouterController implements Initializable {
     @FXML
     private void ajouter(ActionEvent event) {
         ServiceMatch mac = new ServiceMatch();
-        if(TxtNom_equipe2.getText().isEmpty() || cbRes.getValue().isEmpty() || txtNom_equipe1.getText().isEmpty()){ 
+        if(TxtNom_equipe2.getText().isEmpty() ||txtnom_tournoi.getText().isEmpty() || cbRes.getValue().isEmpty() || txtNom_equipe1.getText().isEmpty()){ 
             Alert a = new Alert(Alert.AlertType.WARNING);
             a.setContentText("Veuillez saisir tous les champs ");
             a.setHeaderText(null);
@@ -97,7 +98,8 @@ public class AjouterController implements Initializable {
         String nom_equipe1=txtNom_equipe1.getText();
         String nom_equipe2=TxtNom_equipe2.getText();
         String res=cbRes.getValue();
-        Match m = new Match(res,nom_equipe1,nom_equipe2);
+        String nom_tournoi=txtnom_tournoi.getText();
+        Match m = new Match(nom_tournoi,res,nom_equipe1,nom_equipe2);
         mac.ajouter(m);
         
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

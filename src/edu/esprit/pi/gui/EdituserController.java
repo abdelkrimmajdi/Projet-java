@@ -7,109 +7,78 @@ package edu.esprit.pi.gui;
 
 import edu.esprit.pi.entities.utilisateur;
 import edu.esprit.pi.services.serviceUser;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import static sun.security.jgss.GSSUtil.login;
-import sun.security.util.Password;
 
 /**
  * FXML Controller class
  *
  * @author aziz
  */
-public class SignController implements Initializable {
+public class EdituserController implements Initializable {
 
     @FXML
-    private ImageView imglogo;
+    private TextArea cinajout;
     @FXML
-    private AnchorPane s;
+    private TextArea nomajout;
     @FXML
-    private TextArea cinField;
+    private Button adduser;
     @FXML
-    private TextArea nomField;
+    private TextArea prenomajout;
     @FXML
-    private Button signupBtn;
+    private TextArea numajout;
     @FXML
-    private TextArea prenomField;
+    private TextArea emailajout;
     @FXML
-    private TextArea numField;
+    private TextArea passwordajout;
     @FXML
-    private TextArea emailField;
+    private DatePicker dateajout;
     @FXML
-    private TextArea passwordField;
-    @FXML
-    private Text loginBtn;
-    @FXML
-    private DatePicker dateField;
+    private CheckBox isAdmin;
+    private int role;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
-    private void backToLogin(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/login.fxml"));
-            Parent root = loader.load();
-            LoginController loginController = loader.getController();
-
-            Stage currentStage = (Stage) s.getScene().getWindow();
-            currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Login");
-            currentStage.show();
-        } catch (IOException e) {
-            showAlert("Failed to load login.fxm");
-            System.out.println("Failed to load login.fxml");
+        utilisateur user = utilisateur.edit_user;
+        cinajout.setText(Integer.toString(user.getCin()));
+        nomajout.setText(user.getNom());
+        prenomajout.setText(user.getPrenom());
+        numajout.setText(user.getNum());
+        emailajout.setText(user.getMail());
+        passwordajout.setText(user.getPassword());
+        dateajout.setValue(user.getDate_naissance().toLocalDate());
+        if (user.getRole() == 1) {
+            isAdmin.setSelected(true);
+        } else {
+            isAdmin.setSelected(false);
         }
     }
 
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Error");
-        alert.setContentText(message);//set message text
-        alert.showAndWait();
-    }
-
     @FXML
-    private void signupAction(ActionEvent event) {
-        String cin = cinField.getText();
-        String nom = nomField.getText();
-        String prenom = prenomField.getText();
+    private void adduserAction(ActionEvent event) {
+        String cin = cinajout.getText();
+        String nom = nomajout.getText();
+        String prenom = prenomajout.getText();
 
-        String num = numField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
+        String num = numajout.getText();
+        String email = emailajout.getText();
+        String password = passwordajout.getText();
 
-        LocalDate date_naissance = dateField.getValue();
+        LocalDate date_naissance = dateajout.getValue();
 
-        //Check fields
         if (nom == null || nom.trim().isEmpty()) {
             showAlert("Field 'nom' should not contain a null value.");
             return;
@@ -225,38 +194,35 @@ public class SignController implements Initializable {
             showAlert("Le champ 'password' ne doit pas depasser comporter  8 caractères ou moins.");
             return;
         }
+        
+        if(isAdmin.isSelected()){
+            role = 1;
+        }else{
+            role = 0;
+        }
+        
+        //Check if the new Email or CIN is used
+        utilisateur user1, user2;
+        user1 = new serviceUser().getUserByEmail(email);
+        user2 = new serviceUser().getUserByCin(cin);
 
-        utilisateur newutilisateur = new utilisateur(Integer.parseInt(cin), prenom, nom, num, email, 0, password, Date.valueOf(date_naissance));
-
-        //tlawej 3ala user bel mail w el pass ken matl9ahech a3mel signup sinon alert +return
-        //...
-        if (new serviceUser().getUserByEmail(email) == null && new serviceUser().getUserByCin(cin) == null) {
-            new serviceUser().ajouter(newutilisateur);
-        } else {
-            showAlert("email et cin existe deja ");
+        if ((user1 == null || user1.getId_user() == utilisateur.edit_user.getId_user()) && (user2 == null || user2.getCin() == utilisateur.edit_user.getCin())) {
+            utilisateur updatedUser = new utilisateur(Integer.parseInt(cin), prenom, nom, num, email, role, password, Date.valueOf(date_naissance));
+            updatedUser.setId_user(utilisateur.edit_user.getId_user());
+            new serviceUser().modifier(updatedUser);
+            cinajout.getScene().getWindow().hide();
             return;
+        } else {
+            showAlert("Email or CIN exist");
         }
 
-        //redirect to dahsboard
-        //... }
     }
 
-    @FXML
-    private void log(MouseEvent event) {
-          try {
-            Parent root =  FXMLLoader.load(getClass().getResource("login.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("login");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }
