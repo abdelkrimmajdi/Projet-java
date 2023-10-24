@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="860.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.ModifierequipeController">
+   <children>
+      <AnchorPane layoutX="357.0" layoutY="-7.0" prefHeight="620.0" prefWidth="505.0" style="-fx-background-color: #262626;">
+         <children>
+            <TableView fx:id="equipess" layoutY="8.0" onMouseClicked="#equipeclick" prefHeight="220.0" prefWidth="528.0">
+               <columns>
+                  <TableColumn fx:id="nomeqq" prefWidth="146.0" text="nom equipe" />
+                  <TableColumn fx:id="nbjoueur" prefWidth="175.0" text="nb joueur" />
+                  <TableColumn fx:id="couleurmaillot" prefWidth="204.0" text="Couleur maillot" />
+               </columns>
+            </TableView>
+            <Button fx:id="maj_button" layoutX="226.0" layoutY="258.0" mnemonicParsing="false" onAction="#mettre_a_jour" prefHeight="39.0" prefWidth="107.0" style="-fx-background-color: white;" text="UPDATE" textFill="#262626">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="nom_equipe" layoutX="82.0" layoutY="95.0" promptText="NOM EQUIPE" />
+      <Spinner fx:id="Spnbjoueur" layoutX="80.0" layoutY="303.0" />
+      <ComboBox fx:id="clbox" layoutX="78.0" layoutY="179.0" prefHeight="31.0" prefWidth="194.0" promptText="COULEUR MAILLOT" />
+      <Button fx:id="modifier_button" layoutX="117.0" layoutY="393.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #262626;" text="MODIFIER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font></Button>
+      <Text fill="#262626" layoutX="92.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOMBRE JOUEURS">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
