@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="605.0" prefWidth="983.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.SuppjouController">
+   <children>
+      <TableView fx:id="joutab" layoutX="157.0" layoutY="254.0" prefHeight="200.0" prefWidth="570.0">
+        <columns>
+          <TableColumn fx:id="numerojoueurr" prefWidth="153.0" text="NUMERO JOUEUR" />
+            <TableColumn fx:id="nomjoueurr" prefWidth="120.0" text="NOM JOUEUR" />
+            <TableColumn fx:id="agejoueurr" minWidth="0.0" prefWidth="133.0" text="AGE JOUEUR" />
+            <TableColumn fx:id="positionjoueurr" minWidth="5.0" prefWidth="165.0" text="POSITION JOUEUR" />
+        </columns>
+      </TableView>
+      <Button layoutX="796.0" layoutY="267.0" mnemonicParsing="false" onAction="#suppjou" text="SUPPRIMER" textFill="#12e14c">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="796.0" layoutY="367.0" mnemonicParsing="false" onAction="#refresh" prefHeight="39.0" prefWidth="118.0" text="MAJ" textFill="#12e14c">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
