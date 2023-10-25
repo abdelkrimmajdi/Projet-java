@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package edu.esprit.pi.gui;
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
+import edu.esprit.pi.services.ServiceJoueur;
+import edu.esprit.pi.services.ServiceEquipe;
+//package tn.edu.esprit.gui;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -18,23 +23,25 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author majdiabdelkrim
+ * @author benou
  */
-public class Recladmin extends Application {
+public class ajouterequiiiipe extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        try{
-          Parent  root =FXMLLoader.load(getClass().getResource("Historiquerecl.fxml"));
-          Scene scene = new Scene( root);
-               primaryStage.setTitle("Takwira+");
-               primaryStage.setScene(scene);
-               primaryStage.show();
-    }catch (IOException ex){
-            System.out.println(ex.getMessage());
-    }
-    }
-
+         Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Ajouterequippee.fxml"));
+             
+        Scene scene = new Scene(root);
+        
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        } catch (IOException ex) {
+    System.out.println (ex.getMessage());
+            }
+         }
     /**
      * @param args the command line arguments
      */

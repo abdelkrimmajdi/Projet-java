@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="504.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.ListeReservationsController">
+   <children>
+      <TableView fx:id="tableReservation" layoutX="81.0" layoutY="122.0" prefHeight="260.0" prefWidth="715.0">
+        <columns>
+          <TableColumn fx:id="idres" prefWidth="130.0" text="ID reservation" />
+          <TableColumn fx:id="date" prefWidth="170.0" text="Date " />
+            <TableColumn fx:id="cin" prefWidth="224.0" text="CIN" />
+            <TableColumn fx:id="idTer" prefWidth="193.0" text="ID terrain" />
+        </columns>
+      </TableView>
+      <Button layoutX="299.0" layoutY="405.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="66.0" prefWidth="174.0" style="-fx-background-color: #262626;" text="Supprimer" textFill="#fffbfb" />
+      <Button fx:id="HoTerrain" layoutX="516.0" layoutY="407.0" mnemonicParsing="false" onAction="#Hterrain" prefHeight="66.0" prefWidth="174.0" style="-fx-background-color: #262626;" text="Consulter Les Terrain" textFill="#fcf8f8" />
+      <Button fx:id="hb" layoutX="94.0" layoutY="405.0" mnemonicParsing="false" onAction="#Homeb" prefHeight="66.0" prefWidth="174.0" style="-fx-background-color: #262626;" text="HOME" textFill="#fffbfb" />
+   </children>
+</AnchorPane>

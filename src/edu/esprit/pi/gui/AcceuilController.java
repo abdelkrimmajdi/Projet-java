@@ -20,7 +20,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import static sun.security.jgss.GSSUtil.login;
 
 /**
  * FXML Controller class
@@ -45,6 +44,8 @@ public class AcceuilController implements Initializable {
     private Button profile;
     @FXML
     private Button dash;
+    @FXML
+    private Button gestionjoueur;
 
     /**
      * Initializes the controller class.
@@ -56,41 +57,144 @@ public class AcceuilController implements Initializable {
 
     @FXML
     private void gestionres(ActionEvent event) {
+        try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("ListeTerrains.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        dash.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
+        
     }
 
+    
+    
     @FXML
     private void gestionrtour(ActionEvent event) {
+        try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("Tournoi.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        dash.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
     }
 
+    
+    
     @FXML
     private void gestionrrecl(ActionEvent event) {
-         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Reclamationaj.fxml"));
+         if (utilisateur.current_user.getRole() == 1) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("Historiquerecl.fxml"));
 
-            Stage stage = new Stage();
-            stage.setTitle("adduser");
-            stage.setScene(new Scene(root));
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
 
-            stage.show();
+                        stage.show();
 
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                      
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("Reclamationaj.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
     }
     
 
     @FXML
     private void gestionrequi(ActionEvent event) {
+         try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("GestionEquipe.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                       
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
     }
 
+   
+    
     @FXML
     private void gestionrematch(ActionEvent event) {
         
+        try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("fares.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        dash.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
         
     }
 
+    
+    
     @FXML
     private void gestionreterr(ActionEvent event) {
+        
+        
+        try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("TerrainFXML.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        dash.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
+        
     }
 
     @FXML
@@ -133,8 +237,30 @@ public class AcceuilController implements Initializable {
            
         }
 }
+
+    @FXML
+    private void gestionjoueur(ActionEvent event) {
+        
+      try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("GestionJoueur.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                        dash.getScene().getWindow().hide();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+       
+    }
+    
     
 }
+
 
 
 

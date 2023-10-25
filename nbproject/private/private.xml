@@ -3,23 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/AdminController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/ServiceJoueur.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/ModifierequipeController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/AjoaddController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/LoginController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/main.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/GestionEquipeController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/GestionJoueurController.java</file>
             <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/AcceuilController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/serviceUser.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/services/ServiceEquipe.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/AdduserController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/SuppeqController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/SignController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/AjouterequippeeController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/SuppjouController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/ModijoueurController.java</file>
-            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/entities/utilisateur.java</file>
         </group>
     </open-files>
 </project-private>

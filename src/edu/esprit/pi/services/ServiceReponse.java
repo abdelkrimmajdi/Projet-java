@@ -7,6 +7,7 @@ package edu.esprit.pi.services;
 
 import edu.esprit.pi.entities.Reclamation;
 import edu.esprit.pi.entities.Reponse;
+import edu.esprit.pi.entities.utilisateur;
 import edu.esprit.pi.tools.DataSource;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,7 +28,6 @@ public class ServiceReponse  implements IService <Reponse> {
     public void ajouter(Reponse t) {
         try{
 String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('"    + t.getId_reclamation()+ "', '" + t.getText_reponse() + "', '" + t.getEtat() + "')";
- 
     Statement stm = cnx.createStatement();
      stm.executeUpdate(req);        
         System.out.println("Réponse ajoutée avec succès");
@@ -87,8 +87,7 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
         ResultSet rs = stm.executeQuery(req);
         if (rs.next()) {
             Reponse r = new Reponse();
-            r.setId_reponse(rs.getInt("id_reponse")); 
-            r.setId_reclamation(rs.getInt("id_reclamation"));
+          
                 r.setDate_reponse(rs.getString("Date_reponse"));
                     r.setText_reponse(rs.getString("texte_reponse"));
                         r.setEtat(rs.getString("etat"));
@@ -101,7 +100,6 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
 
     return null;
 }
-
     public List<Reponse> getAll() {
     String req = "SELECT * FROM reponse";
     ArrayList<Reponse> reponses = new ArrayList<>();
@@ -114,7 +112,7 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
         while (rs.next()) {
             Reponse r = new Reponse();
             r.setId_reponse(rs.getInt(1));
-            r.setId_reclamation(rs.getInt(2));
+             r.setId_reclamation(rs.getInt(2));
             r.setDate_reponse(rs.getString(3));
             r.setText_reponse(rs.getString(4));
             r.setEtat(rs.getString(5));
@@ -127,35 +125,39 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
 
     return reponses;
 }
-    public List<Reponse> afficher (String cin){
-         ArrayList<Reponse> reponse = new ArrayList<>();
-    try {
-        String req = "SELECT re.* FROM reponse re JOIN recl r ON re.id_reclamation = r.id_reclamation JOI utilisateur u ON r.id_utilisateur = u.id_user WHERE u.cin =?" ;
-        PreparedStatement preparedStatement = cnx.prepareStatement(req);
-        preparedStatement.setString(1, cin);
-        ResultSet rs = preparedStatement.executeQuery();
-        
-        while (rs.next()) {
-            Reponse r = new Reponse();
-             r.setId_reponse(rs.getInt("id_reponse"));
-            r.setId_reclamation(rs.getInt("id_reclamation"));
-            r.setDate_reponse(rs.getString("date_reponse"));
-            r.setText_reponse(rs.getString("texte_reponse"));
-            r.setEtat(rs.getString("etat"));
-            
-            
-            reponse.add(r);
-        }
-    } catch (SQLException ex) {
-        System.out.println("Erreur lors de la récupération des réclamations : " + ex.getMessage());
+    
+public List<Reponse> afficher() {
+ArrayList<Reponse> reponse = new ArrayList<>();
+try {
+String selectQuery = "SELECT re.* FROM reponse re " +
+                    "JOIN recl r ON re.id_reclamation = r.id_reclamation " +
+                    "JOIN utilisateur u ON r.id_utilisateur = u.id_user " +
+                    "WHERE u.id_user = ?";
+                    
+                  
+
+    PreparedStatement selectStmt = cnx.prepareStatement(selectQuery);
+    selectStmt.setInt(1, utilisateur.current_user.getId_user());
+    ResultSet resultSet = selectStmt.executeQuery();
+
+    while (resultSet.next()) {
+        Reponse r = new Reponse(); // Initialisez l'objet à l'intérieur de la boucle
+        r.setId_reponse(resultSet.getInt("id_reponse"));
+        r.setId_reclamation(resultSet.getInt("id_reclamation"));
+        r.setDate_reponse(resultSet.getString("date_reponse"));
+        r.setText_reponse(resultSet.getString("texte_reponse"));
+        r.setEtat(resultSet.getString("etat"));
+
+        reponse.add(r);
     }
-    return reponse;
-    }
-  
+} catch (SQLException ex) {
+    System.out.println("Erreur lors de la récupération des réponses : " + ex.getMessage());
+}
+
+return reponse;}
  public List<Reponse> getOnee(int id) {
     ArrayList<Reponse> reponse = new ArrayList<>();
-    try {
-       
+    try { 
         String req = "SELECT * FROM reponse WHERE id_reclamation = ?";
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
         preparedStatement.setInt(1, id);
@@ -172,7 +174,6 @@ String req = "INSERT INTO reponse ( id_reclamation,texte_reponse,etat) VALUES ('
     } catch (SQLException ex) {
         System.out.println("Erreur lors de la récupération des réponses : " + ex.getMessage());
     }
-    
     return reponse; 
 }}
     

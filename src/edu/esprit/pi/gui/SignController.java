@@ -7,8 +7,11 @@ package edu.esprit.pi.gui;
 
 import edu.esprit.pi.entities.utilisateur;
 import edu.esprit.pi.services.serviceUser;
+import edu.esprit.pi.tools.Mailer;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -33,8 +36,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import static sun.security.jgss.GSSUtil.login;
-import sun.security.util.Password;
+import javax.mail.internet.AddressException;
 
 /**
  * FXML Controller class
@@ -83,6 +85,7 @@ public class SignController implements Initializable {
             Stage currentStage = (Stage) s.getScene().getWindow();
             currentStage.setScene(new Scene(root));
             currentStage.setTitle("Login");
+            cinField.getScene().getWindow().hide();
             currentStage.show();
         } catch (IOException e) {
             showAlert("Failed to load login.fxm");
@@ -97,8 +100,8 @@ public class SignController implements Initializable {
         alert.showAndWait();
     }
 
-    
     private utilisateur user;
+
     @FXML
     private void signupAction(ActionEvent event) {
         String cin = cinField.getText();
@@ -233,45 +236,47 @@ public class SignController implements Initializable {
         //tlawej 3ala user bel mail w el pass ken matl9ahech a3mel signup sinon alert +return
         //...
         if (new serviceUser().getUserByEmail(email) == null && new serviceUser().getUserByCin(cin) == null) {
+            utilisateur.current_user = newutilisateur;
             new serviceUser().ajouter(newutilisateur);
+
+            try {
+                //read welcome.html file
+                String html = new String(Files.readAllBytes(Paths.get("src/images/welcome.html")));
+                html = html.replace("{{user_email}}", newutilisateur.getMail());
+                html = html.replace("{{user_password}}", newutilisateur.getPassword());
+                //send welcome email
+                new Mailer().sendMailAsync(newutilisateur.getMail(), "Welcome to our website", html);
+
+                Parent root = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
+
+                Stage stage = new Stage();
+                stage.setTitle("login");
+                stage.setScene(new Scene(root));
+                cinField.getScene().getWindow().hide();
+                stage.show();
+
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (AddressException ex) {
+                Logger.getLogger(SignController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
             showAlert("email et cin existe deja ");
-            return;
         }
-
-        //redirect to dahsboard
-        //... }
-        
-        
-       /*  MailSender mailSender = new MailSender(Constants.email, Constants.password, this.user.getMail());
-        String object = this.mailObject.getText();
-        String text = this.mailText.getText();
-        mailSender.send(object, text);
-        App.showAlert("Success", "The message has been successfully sent!", Alert.AlertType.CONFIRMATION);
-        this.user.setSent(true);
-
-        Stage oldStageMail = (Stage) this.signupBtn.getScene().getWindow();
-        oldStageMail.close();*/
-        
-        
-        
-        
-        
-        
     }
 
     @FXML
     private void log(MouseEvent event) {
-          try {
-            Parent root =  FXMLLoader.load(getClass().getResource("login.fxml"));
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
             Stage stage = new Stage();
             stage.setTitle("login");
             stage.setScene(new Scene(root));
-            
+            cinField.getScene().getWindow().hide();
             stage.show();
-            
-           
+
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

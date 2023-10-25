@@ -21,7 +21,7 @@ public class main  extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("edu/esprit/pi/gui/ajouterequippee.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("edu/esprit/pi/gui/login.fxml"));
         
         Parent root = loader.load();
 

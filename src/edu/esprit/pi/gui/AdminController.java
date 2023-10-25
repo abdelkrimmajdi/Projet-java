@@ -87,6 +87,8 @@ public class AdminController implements Initializable {
     private TableView<utilisateur> usertable;
     @FXML
     private TextField chercher;
+    @FXML
+    private Button home;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -232,6 +234,26 @@ public class AdminController implements Initializable {
         for (utilisateur u : filteredList) {
             usertable.getItems().add(u);
         }
+    }
+
+    @FXML
+    private void home(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("sign Up");
+            stage.setScene(new Scene(root));
+
+            stage.show();
+
+           
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
     }
 
 }

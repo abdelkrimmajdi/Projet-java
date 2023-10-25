@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.SupprimerTournoiController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="670.0" prefWidth="804.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="17.0" layoutY="10.0" prefHeight="660.0" prefWidth="809.0">
+               <children>
+                  <AnchorPane id="AnchorPane" layoutX="10.0" prefHeight="660.0" prefWidth="827.0" style="-fx-background-color: white;">
+                     <children>
+                        <AnchorPane id="AnchorPane" layoutX="-20.0" layoutY="-1.0" prefHeight="663.0" prefWidth="853.0" style="-fx-background-color: white;">
+                           <children>
+                              <AnchorPane layoutX="357.0" layoutY="-7.0" prefHeight="670.0" prefWidth="502.0" style="-fx-background-color: #262626;">
+                                 <children>
+                                    <TableView fx:id="tableDB1" layoutX="18.0" layoutY="30.0" prefHeight="200.0" prefWidth="467.0">
+                                       <columns>
+                                          <TableColumn fx:id="clNom_tournoi" prefWidth="107.0" text="Nom tournoi" />
+                                          <TableColumn fx:id="clListEquipes" prefWidth="97.0" text="ListEquipes" />
+                                          <TableColumn fx:id="clAdresse" prefWidth="73.0" text="Adresse" />
+                                          <TableColumn fx:id="clNbr_Equipes" prefWidth="99.0" text="Nbr Equipes" />
+                                          <TableColumn fx:id="clDates" prefWidth="90.0" text="Dates" />
+                                       </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
+                              <Button layoutX="87.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Supprimer" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="-11.0" layoutY="99.0" prefHeight="58.0" prefWidth="375.0" text="   Delete a Tournemant:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="32.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="87.0" layoutY="384.0" mnemonicParsing="false" onAction="#Retour" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Retour" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

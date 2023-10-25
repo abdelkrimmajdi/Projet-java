@@ -10,7 +10,7 @@ import java.sql.Date;
 /**
  *
  * @author majdiabdelkrim
- */ 
+ */
 public class Reclamation {
     private int id_reclamation;
     private int id_utilisateur;
@@ -60,6 +60,8 @@ public class Reclamation {
     public void setId_utilisateur(int id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
     }
+
+
 
     public String getNum() {
         return num;
@@ -126,7 +128,7 @@ public class Reclamation {
             return false;
         }
         final Reclamation other = (Reclamation) obj;
-        if (this.id_reclamation != other.id_reclamation) {
+        if (this.etat != other.etat) {
             return false;
         }
         return true;

@@ -41,8 +41,6 @@ public class ReponseAdminController implements Initializable {
 
   
     @FXML
-    private TableColumn<Reponse, Integer> idrecrep;
-    @FXML
     private TableColumn<Reponse, String> daterep;
     @FXML
     private TableColumn<Reponse,String> texterep;
@@ -56,7 +54,6 @@ public class ReponseAdminController implements Initializable {
     private TextField dsecrrecl;
     @FXML
     private TableColumn<Reponse,String> ett;
-    @FXML
     private TextField idrech;
     int index = -1;
 
@@ -65,8 +62,7 @@ public class ReponseAdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
-     idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
+ 
        daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
       texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
      ett.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat")); 
@@ -83,6 +79,7 @@ public class ReponseAdminController implements Initializable {
          selectedReclamation.setEtat(Etatrepp.getText());
         selectedReclamation.setText_reponse(dsecrrecl.getText());
         service.modifier(selectedReclamation);
+        System.out.println(selectedReclamation.getId_reponse());
         if(Etatrepp.getText().isEmpty()||dsecrrecl.getText().isEmpty()){
              Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
@@ -111,24 +108,23 @@ public class ReponseAdminController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Erreur lors de la modification!");        
         alert.show();
-       
-    }   
-    
+    }       
 }
    
     @FXML
-    private void supprimerr(ActionEvent event) {
-        
+    private void supprimerr(ActionEvent event) {       
        if(tablerepadmin.getSelectionModel().getSelectedItem()!=null){
-            int id=tablerepadmin.getSelectionModel().getSelectedItem().getId_reponse();
+        Reponse id=tablerepadmin.getSelectionModel().getSelectedItem();
         ServiceReponse service = new ServiceReponse();
-        service.supprimer(id);
+        service.supprimer(id.getId_reponse());
+        tablerepadmin.refresh();
+        update();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Reponse supprimer avec succés!");        
         alert.show();
-        update();}
+        }
        else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
@@ -139,17 +135,15 @@ public class ReponseAdminController implements Initializable {
     }
 
     private void update() {
-        
-     idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
        daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
       texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
      ett.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat")); 
-    
     ServiceReponse service = new ServiceReponse();
     List<Reponse> reponses = service.getAll();
     ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(reponses);
     tablerepadmin.setItems(observableReponse);
     }
+    
 
     @FXML
     private void retourner(ActionEvent event) {
@@ -161,17 +155,13 @@ public class ReponseAdminController implements Initializable {
         currentStage.show();
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
-    }        
+    }
     }
 
-    @FXML
-    private void Rechercher(ActionEvent event) {
-   
-     idrecrep.setCellValueFactory(new PropertyValueFactory <Reponse,Integer>("id_reclamation"));
-       daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
-      texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
+    private void Rechercher(ActionEvent event) {        
+     daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
+     texterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
      ett.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat")); 
-    
       if(idrech.getText().isEmpty()){
      Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
@@ -186,11 +176,9 @@ public class ReponseAdminController implements Initializable {
         ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(rec);
         tablerepadmin.setItems(observableReponse);
     } 
-    }}
-
-    @FXML
-    private void Tri(ActionEvent event) {
     }
+    }
+
 
     @FXML
     private void Select(javafx.scene.input.MouseEvent event) {
@@ -200,7 +188,5 @@ public class ReponseAdminController implements Initializable {
         }
         Etatrepp.setText(texterep.getCellData(index).toString());
        dsecrrecl.setText(ett.getCellData(index).toString());   
-   
     }
-    
 }
