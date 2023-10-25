@@ -113,7 +113,11 @@ public class serviceUser implements IService<utilisateur> {
 
     @Override
     public List<utilisateur> getAll() {
+<<<<<<< HEAD
+        String user = "SELECT * FROM utilisateur";
+=======
         String user = "SELECT * FROM `utilisateur`";
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
         ArrayList<utilisateur> users = new ArrayList();
         Statement stm;
         try {

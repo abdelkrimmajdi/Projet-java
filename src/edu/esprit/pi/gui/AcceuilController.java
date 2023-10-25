@@ -6,7 +6,10 @@
 package edu.esprit.pi.gui;
 
 import edu.esprit.pi.entities.utilisateur;
+<<<<<<< HEAD
+=======
 import edu.esprit.pi.services.serviceUser;
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -101,29 +104,54 @@ public class AcceuilController implements Initializable {
     @FXML
     private void gestionrrecl(ActionEvent event) {
          if (utilisateur.current_user.getRole() == 1) {
+<<<<<<< HEAD
+           
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("Reclamationaj.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("Ajouter une reclamation");
+=======
                     try {
                         Parent root = FXMLLoader.load(getClass().getResource("Historiquerecl.fxml"));
 
                         Stage stage = new Stage();
                         stage.setTitle("sign Up");
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
                         stage.setScene(new Scene(root));
 
                         stage.show();
 
+<<<<<<< HEAD
+                  
+=======
                       
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
+<<<<<<< HEAD
+                                                System.out.println(utilisateur.getCurrent_user());
+
+                        Parent root = FXMLLoader.load(getClass().getResource("Historiquerecl.fxml"));
+                        Stage stage = new Stage();
+                        stage.setTitle("Historique des reclamation");
+=======
                         Parent root = FXMLLoader.load(getClass().getResource("Reclamationaj.fxml"));
 
                         Stage stage = new Stage();
                         stage.setTitle("sign Up");
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
                         stage.setScene(new Scene(root));
 
                         stage.show();
 
+<<<<<<< HEAD
+                        
+=======
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
                     } catch (IOException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }

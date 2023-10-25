@@ -111,9 +111,14 @@ public Reclamation getOne(int id) {
         ResultSet rs=  stm.executeQuery(req);
     while (rs.next()){
         Reclamation r = new Reclamation();
+<<<<<<< HEAD
+        r.setNum(rs.getString(3));
+        r.setEmail(rs.getString(4));
+=======
         r.setId_reclamation(rs.getInt(1));
         r.setEmail(rs.getString(3));
         r.setNum(rs.getString(8));
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
         r.setType(rs.getString(5));
         r.setDescription(rs.getString(6));
         r.setEtat(rs.getString(7));
