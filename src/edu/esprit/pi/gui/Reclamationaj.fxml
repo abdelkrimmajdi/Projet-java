@@ -8,7 +8,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="619.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.ReclamationajController">
    <children>
-      <TextField fx:id="txtcin" layoutX="673.0" layoutY="60.0" promptText="Cin" />
       <TextField fx:id="txtdescription" layoutX="673.0" layoutY="161.0" prefHeight="198.0" prefWidth="194.0" promptText="Description" />
       <Button fx:id="aj" layoutX="554.0" layoutY="413.0" mnemonicParsing="false" onAction="#ajoteereclamation" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Ajouter" textFill="WHITE" />
       <Button fx:id="btnGerer" layoutX="770.0" layoutY="413.0" mnemonicParsing="false" onAction="#Gererrecl" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Gerer mes Reclamations" textFill="WHITE" />
@@ -22,5 +21,6 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Button fx:id="ret" layoutX="677.0" layoutY="496.0" mnemonicParsing="false" onAction="#ret" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Retour" textFill="WHITE" />
    </children>
 </AnchorPane>

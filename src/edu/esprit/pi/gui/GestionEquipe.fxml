@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="606.0" prefWidth="860.0" style="-fx-background-color: #262626;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.GestionEquipeController">
+   <children>
+      <AnchorPane layoutX="-7.0" prefHeight="623.0" prefWidth="328.0" style="-fx-background-color: white;">
+         <children>
+            <Button layoutX="68.0" layoutY="118.0" mnemonicParsing="false" onAction="#AJOUTEREQUIPE" opacity="0.62" prefHeight="42.0" prefWidth="212.0" style="-fx-background-color: #262626;" text="AJOUTER EQUIPE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="71.0" layoutY="273.0" mnemonicParsing="false" onAction="#MODIFIEREQUIPE" opacity="0.62" prefHeight="42.0" prefWidth="206.0" style="-fx-background-color: #262626;" text="MODIFIER EQUIPE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="71.0" layoutY="432.0" mnemonicParsing="false" onAction="#SUPPRIMEREQUIPE" opacity="0.62" prefHeight="42.0" prefWidth="206.0" style="-fx-background-color: #262626;" text="SUPPRIMER EQUIPE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="181.0" fitWidth="256.0" layoutX="477.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/logo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="254.0" fitWidth="237.0" layoutX="499.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/group-of-soccer-sport-players-action-team-vector.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="762.0" layoutY="578.0" mnemonicParsing="false" onAction="#EQACCEUILRET" text="RETOUR" />
+   </children>
+</AnchorPane>

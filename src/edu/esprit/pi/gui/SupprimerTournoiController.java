@@ -7,22 +7,30 @@ package edu.esprit.pi.gui;
 
 import edu.esprit.pi.entities.Tournoi;
 import edu.esprit.pi.services.ServiceTournoi;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -32,14 +40,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class SupprimerTournoiController implements Initializable {
 
     
-    @FXML
     private TextField txtId_tournoi;
     @FXML
     private TableView<Tournoi> tableDB1;
-    @FXML
-    private TableColumn<Tournoi, Integer> clID_tournoi;
-    @FXML
-    private TableColumn<Tournoi, Integer> clID_terrain;
     @FXML
     private TableColumn<Tournoi, String> clListEquipes;
     @FXML
@@ -48,14 +51,15 @@ public class SupprimerTournoiController implements Initializable {
     private TableColumn<Tournoi, Integer> clNbr_Equipes;
     @FXML
     private TableColumn<Tournoi, Date> clDates;
+    @FXML
+    private TableColumn<Tournoi, String> clNom_tournoi;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        clID_tournoi.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_tournoi"));
-        clID_terrain.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_terrain"));
+        clNom_tournoi.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("nom_tournoi"));
         clListEquipes.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("equipes"));
         clAdresse.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("adresse"));
         clNbr_Equipes.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("nbr_equipe"));
@@ -66,10 +70,8 @@ public class SupprimerTournoiController implements Initializable {
         tableDB1.setItems(observableTournoi);
     }    
     
-    @FXML
     public void update(){
-        clID_tournoi.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_tournoi"));
-        clID_terrain.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("id_terrain"));
+        clNom_tournoi.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("nom_tournoi"));
         clListEquipes.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("equipes"));
         clAdresse.setCellValueFactory(new PropertyValueFactory<Tournoi,String>("adresse"));
         clNbr_Equipes.setCellValueFactory(new PropertyValueFactory<Tournoi,Integer>("nbr_equipe"));
@@ -82,24 +84,43 @@ public class SupprimerTournoiController implements Initializable {
 
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void supprimer(ActionEvent event) {
         ServiceTournoi tour = new ServiceTournoi();
-            if (txtId_tournoi.getText().isEmpty() ) {
-            Alert a = new Alert(Alert.AlertType.WARNING);
-            a.setContentText("Veuillez saisir tous les champs ");
-            a.setHeaderText(null);
-            a.showAndWait();
-        } 
-            else {
-                int id_tournoi= Integer.parseInt(txtId_tournoi.getText());
-                 tour.supprimer(id_tournoi);
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Supprimer AVEC SUCCES");
-                alert.showAndWait();
-                update();
-                
-            }
+        int selectedIndex = tableDB1.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            Tournoi selectedTournoi = tableDB1.getItems().get(selectedIndex);
+            int selectedID = selectedTournoi.getId_tournoi();
+            tour.supprimer(selectedID);
+            tableDB1.getItems().remove(selectedIndex);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("SUPPRIMER AVEC SUCCES");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner une ligne à supprimer.");
+            alert.showAndWait();
+        }
     }
-    
-}
+
+    @FXML
+    private void Retour(ActionEvent event) {
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("Tournoi.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("Gestion des tournois");
+            stage.setScene(new Scene(root));
+
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+ }
+
+ 
+

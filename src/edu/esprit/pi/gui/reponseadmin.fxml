@@ -22,9 +22,12 @@
                   <TableColumn fx:id="texterep" prefWidth="222.0" text="Texte de reponse" />
               </columns>
             </TableView>
+<<<<<<< HEAD
             <TextField fx:id="idrech" layoutX="96.0" layoutY="26.0" promptText="Id reclamation a chercher" />
             <Button layoutX="297.0" layoutY="26.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: white;" text="Rechercher" textFill="#262626" />
             <Button layoutX="409.0" layoutY="26.0" mnemonicParsing="false" onAction="#Tri" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: white;" text="Tri" textFill="#262626" />
+=======
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
          </children>
       </AnchorPane>
    </children>

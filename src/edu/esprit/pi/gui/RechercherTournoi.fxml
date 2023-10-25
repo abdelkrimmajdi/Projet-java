@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.RechercherTournoiController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="617.0" prefWidth="824.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="10.0" prefHeight="629.0" prefWidth="841.0" style="-fx-background-color: white;">
+               <children>
+                  <AnchorPane layoutX="357.0" layoutY="-3.0" prefHeight="632.0" prefWidth="483.0" style="-fx-background-color: #262626;">
+                     <children>
+                        <AnchorPane id="AnchorPane" layoutX="-371.0" prefHeight="606.0" prefWidth="860.0" style="-fx-background-color: white;">
+                           <children>
+                              <AnchorPane layoutX="357.0" layoutY="-23.0" prefHeight="655.0" prefWidth="503.0" style="-fx-background-color: #262626;">
+                                 <children>
+                                    <TableView fx:id="tableDB1" layoutX="18.0" layoutY="85.0" onMouseClicked="#selection" prefHeight="200.0" prefWidth="467.0">
+                                       <columns>
+                                          <TableColumn fx:id="clNom_tournoi" prefWidth="107.0" text="Nom tournoi" />
+                                          <TableColumn fx:id="clListEquipes" prefWidth="97.0" text="ListEquipes" />
+                                          <TableColumn fx:id="clAdresse" prefWidth="73.0" text="Adresse" />
+                                          <TableColumn fx:id="clNbr_Equipes" prefWidth="99.0" text="Nbr Equipes" />
+                                          <TableColumn fx:id="clDates" prefWidth="90.0" text="Dates" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <Button layoutX="87.0" layoutY="232.0" mnemonicParsing="false" onAction="#Chercher" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Chercher" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="-11.0" layoutY="25.0" prefHeight="58.0" prefWidth="375.0" text="     Find a Tournemant:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="32.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtnom_tournoi" layoutX="39.0" layoutY="133.0" prefHeight="46.0" prefWidth="274.0" promptText="nom_tournoi" />
+                              <Button layoutX="87.0" layoutY="316.0" mnemonicParsing="false" onAction="#Retour" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Retour" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

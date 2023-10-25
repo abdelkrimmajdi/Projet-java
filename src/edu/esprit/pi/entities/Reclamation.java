@@ -61,7 +61,11 @@ public class Reclamation {
         this.id_utilisateur = id_utilisateur;
     }
 
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
 
     public String getNum() {
         return num;
@@ -128,7 +132,7 @@ public class Reclamation {
             return false;
         }
         final Reclamation other = (Reclamation) obj;
-        if (this.id_reclamation != other.id_reclamation) {
+        if (this.etat != other.etat) {
             return false;
         }
         return true;

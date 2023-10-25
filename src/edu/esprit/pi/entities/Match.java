@@ -23,9 +23,8 @@ public class Match {
     public Match() {
     }
 
-    public Match(int id_match, String nom_tournoi, String nom_equipe1, String nom_equipe2, String Res) {
+    public Match(int id_match, String nom_equipe1, String nom_equipe2, String Res) {
         this.id_match = id_match;
-        this.nom_tournoi = nom_tournoi;
         this.nom_equipe1 = nom_equipe1;
         this.nom_equipe2 = nom_equipe2;
         this.Res = Res;

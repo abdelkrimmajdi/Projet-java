@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 
 public class ReclamationajController {
 
-    @FXML
-    private TextField txtcin;
 
     @FXML
     private TextField txtdescription;
@@ -35,20 +33,19 @@ public class ReclamationajController {
    
     @FXML
     private TextField txttyp;
+    @FXML
+    private Button ret;
 
- public  void getCinnn(String cin){
 
-    this.txtcin.setText(cin);
-            }
 
 
     @FXML
     private void ajoteereclamation(ActionEvent event) {
         
-        String cin =txtcin.getText();
+       
         String txtype =txttyp.getText();
         String description =txtdescription.getText();
-        if (cin.isEmpty()||txtype.isEmpty()||description.isEmpty()){
+        if (txtype.isEmpty()||description.isEmpty()){
         Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
@@ -57,35 +54,25 @@ public class ReclamationajController {
         } 
         else{
         ServiceReclamation service = new ServiceReclamation(); 
-        Reclamation rec = new Reclamation(txtype,description,cin);
+        Reclamation rec = new Reclamation(txtype,description);
         service.ajouter(rec);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Reclamation Ajoutée avec succés!");        
         alert.show();} 
-        
     }
 
     @FXML
     private void Gererrecl(ActionEvent event) {
          try {
-              String cin=txtcin.getText();
-           
-                      if (cin.isEmpty()){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Veuiller remplir les champs!");        
-        alert.show();
-        } 
-         else{    
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Historiqueuser.fxml"));
-        Parent root =loader.load();
-        HistoriqueuserController dc= loader.getController();
-        dc.getCinnn(cin);
-        txtcin.getScene().setRoot(root);
-    }} catch (IOException ex) {
+     Parent root = FXMLLoader.load(getClass().getResource("Historiqueuser.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("Historique des reclamation");
+                        stage.setScene(new Scene(root));
+                        stage.show();  
+    } catch (IOException ex) {
         System.out.println(ex.getMessage());
     }       
     
@@ -99,5 +86,18 @@ public class ReclamationajController {
       
       
     } 
+
+    @FXML
+    private void ret(ActionEvent event) {
+        try {
+        Parent root = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Acceuil");
+        currentStage.show();
+    } catch (IOException ex) {
+        System.out.println(ex.getMessage());
+    }
+    }
 
 }
