@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package edu.esprit.pi.gui;
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
+import edu.esprit.pi.services.ServiceJoueur;
+import edu.esprit.pi.services.ServiceEquipe;
+//package tn.edu.esprit.gui;
 
 import java.io.IOException;
 import javafx.application.Application;

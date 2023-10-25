@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,32 +15,35 @@
                <children>
                   <AnchorPane id="AnchorPane" layoutX="10.0" prefHeight="660.0" prefWidth="827.0" style="-fx-background-color: white;">
                      <children>
-                        <AnchorPane id="AnchorPane" layoutX="-20.0" layoutY="-3.0" prefHeight="663.0" prefWidth="853.0" style="-fx-background-color: white;">
+                        <AnchorPane id="AnchorPane" layoutX="-20.0" layoutY="-1.0" prefHeight="663.0" prefWidth="853.0" style="-fx-background-color: white;">
                            <children>
-                              <AnchorPane layoutX="357.0" layoutY="-24.0" prefHeight="687.0" prefWidth="492.0" style="-fx-background-color: #262626;">
+                              <AnchorPane layoutX="357.0" layoutY="-7.0" prefHeight="670.0" prefWidth="502.0" style="-fx-background-color: #262626;">
                                  <children>
-                                    <TableView fx:id="tableDB1" layoutY="101.0" prefHeight="200.0" prefWidth="503.0">
+                                    <TableView fx:id="tableDB1" layoutX="18.0" layoutY="30.0" prefHeight="200.0" prefWidth="467.0">
                                        <columns>
-                                          <TableColumn fx:id="clID_tournoi" text="ID tournoi" />
-                                          <TableColumn fx:id="clID_terrain" prefWidth="86.0" text="ID terrain" />
-                                          <TableColumn fx:id="clListEquipes" prefWidth="95.0" text="ListEquipes" />
-                                          <TableColumn fx:id="clAdresse" prefWidth="64.0" text="Adresse" />
-                                          <TableColumn fx:id="clNbr_Equipes" prefWidth="102.0" text="Nbr Equipes" />
-                                          <TableColumn fx:id="clDates" prefWidth="75.0" text="Dates" />
+                                          <TableColumn fx:id="clNom_tournoi" prefWidth="107.0" text="Nom tournoi" />
+                                          <TableColumn fx:id="clListEquipes" prefWidth="97.0" text="ListEquipes" />
+                                          <TableColumn fx:id="clAdresse" prefWidth="73.0" text="Adresse" />
+                                          <TableColumn fx:id="clNbr_Equipes" prefWidth="99.0" text="Nbr Equipes" />
+                                          <TableColumn fx:id="clDates" prefWidth="90.0" text="Dates" />
                                        </columns>
                                     </TableView>
                                  </children></AnchorPane>
-                              <Button layoutX="86.0" layoutY="516.0" mnemonicParsing="false" onAction="#modifier" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Supprimer" textFill="WHITE">
+                              <Button layoutX="87.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Supprimer" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="25.0" />
                                  </font>
                               </Button>
-                              <Label layoutX="-18.0" layoutY="-7.0" prefHeight="58.0" prefWidth="375.0" text="   Update a Tournemant:" textAlignment="CENTER">
+                              <Label layoutX="-11.0" layoutY="99.0" prefHeight="58.0" prefWidth="375.0" text="   Delete a Tournemant:" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="32.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtId_tournoi" layoutX="39.0" layoutY="231.0" prefHeight="46.0" prefWidth="274.0" promptText="ID Tournoi" />
+                              <Button layoutX="87.0" layoutY="384.0" mnemonicParsing="false" onAction="#Retour" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #262626;" text="Retour" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </children>

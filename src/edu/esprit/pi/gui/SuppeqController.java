@@ -4,23 +4,33 @@
  * and open the template in the editor.
  */
 package edu.esprit.pi.gui;
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
+import edu.esprit.pi.services.ServiceJoueur;
+import edu.esprit.pi.services.ServiceEquipe;
+import java.io.IOException;
+//package tn.edu.esprit.gui;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import tn.edu.esprit.entities.equipe;
-import tn.edu.esprit.services.ServiceEquipe;
+import javafx.stage.Stage;
+//import tn.edu.esprit.entities.equipe;
+//import tn.edu.esprit.services.ServiceEquipe;
 
 /**
  * FXML Controller class
@@ -52,8 +62,24 @@ public class SuppeqController implements Initializable {
                 equips.setItems(obbequipe);}
 
     @FXML
-    private void suppeq(ActionEvent event) {
-            int selectedIndex = equips.getSelectionModel().getSelectedIndex();
+    private void eqajourrr(ActionEvent event) {
+                obbequipe.clear();
+nmqc.setCellValueFactory(new PropertyValueFactory<>("nom_equipe"));
+nbjc.setCellValueFactory(new PropertyValueFactory<>("nbjoueur_equipe"));
+clmc.setCellValueFactory(new PropertyValueFactory<>("couleurmaillot"));
+
+ServiceEquipe service = new ServiceEquipe();
+
+List<equipe> equipes = service.getAll();
+obbequipe.addAll(equipes);
+
+equips.setItems(obbequipe);
+    }
+
+    @FXML
+    private void suppeqqq(ActionEvent event) {
+        
+         int selectedIndex = equips.getSelectionModel().getSelectedIndex();
     if (selectedIndex >= 0) {
         equipe selectedEquipe = equips.getItems().get(selectedIndex);
         int selectedID = selectedEquipe.getId_equipe(); 
@@ -74,21 +100,19 @@ public class SuppeqController implements Initializable {
     }
 
     @FXML
-    private void eqajour(ActionEvent event) {
-        obbequipe.clear();
-nmqc.setCellValueFactory(new PropertyValueFactory<>("nom_equipe"));
-nbjc.setCellValueFactory(new PropertyValueFactory<>("nbjoueur_equipe"));
-clmc.setCellValueFactory(new PropertyValueFactory<>("couleurmaillot"));
+    private void RETOURRACCEUILL(ActionEvent event) {
+          try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("GestionEquipe.fxml"));
 
-ServiceEquipe service = new ServiceEquipe();
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
 
-List<equipe> equipes = service.getAll();
-obbequipe.addAll(equipes);
+                        stage.show();
 
-equips.setItems(obbequipe);
-
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
     }
-
-    
-    
 }

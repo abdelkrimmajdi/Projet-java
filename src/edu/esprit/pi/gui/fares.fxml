@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="934.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.esprit.pi.gui.FaresController">
+<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.pi.gui.FaresController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="584.0" prefWidth="934.0">
          <children>
@@ -17,13 +16,14 @@
                   <Font size="35.0" />
                </font>
             </Label>
-            <Button layoutX="644.0" layoutY="128.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="65.0" prefWidth="170.0" text="ajouter" />
-            <Button layoutX="644.0" layoutY="251.0" mnemonicParsing="false" onAction="#modifier" prefHeight="65.0" prefWidth="170.0" text="Modifier" />
-            <Button layoutX="644.0" layoutY="377.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="65.0" prefWidth="170.0" text="Supprimer" />
-            <Label layoutX="717.0" layoutY="211.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
-            <Label layoutX="717.0" layoutY="331.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
-            <Label layoutX="719.0" layoutY="462.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
-            <Button layoutX="647.0" layoutY="505.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" text="Rechercher" />
+            <Button layoutX="647.0" layoutY="89.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="65.0" prefWidth="170.0" text="ajouter" />
+            <Button layoutX="648.0" layoutY="180.0" mnemonicParsing="false" onAction="#modifier" prefHeight="65.0" prefWidth="170.0" text="Modifier" />
+            <Button layoutX="644.0" layoutY="271.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="65.0" prefWidth="170.0" text="Supprimer" />
+            <Label layoutX="720.0" layoutY="154.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
+            <Label layoutX="717.0" layoutY="245.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
+            <Label layoutX="717.0" layoutY="336.0" prefHeight="26.0" prefWidth="25.0" text="Or" />
+            <Button layoutX="644.0" layoutY="362.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="65.0" prefWidth="170.0" text="Rechercher" />
+            <Button layoutX="632.0" layoutY="487.0" mnemonicParsing="false" onAction="#Retour" prefHeight="65.0" prefWidth="194.0" style="-fx-background-color: #262626;" text="Retour" textFill="WHITE" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-16.0" prefHeight="620.0" prefWidth="503.0" style="-fx-background-color: #262626;">
