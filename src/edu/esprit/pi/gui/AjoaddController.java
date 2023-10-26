@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//package tn.edu.esprit.gui;
 package edu.esprit.pi.gui;
-
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
+import edu.esprit.pi.services.ServiceJoueur;
+import edu.esprit.pi.services.ServiceEquipe;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,8 +33,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import tn.edu.esprit.entities.joueur;
-import tn.edu.esprit.services.ServiceJoueur;
+//import tn.edu.esprit.entities.equipe;
+//import tn.edu.esprit.entities.joueur;
+//import tn.edu.esprit.services.ServiceEquipe;
+//import tn.edu.esprit.services.ServiceJoueur;
+
 
 /**
  * FXML Controller class
@@ -81,10 +88,19 @@ SpinnerValueFactory<Integer> v = new SpinnerValueFactory.IntegerSpinnerValueFact
   SpinnerValueFactory<Integer> j = new SpinnerValueFactory.IntegerSpinnerValueFactory(10,100);
 
   joueurage.setValueFactory(j);
-  
-  
-        // TODO
-    }    
+      }    
+     public void  update ()
+    {
+                   obbjoueurs.clear();
+        nomj.setCellValueFactory(new PropertyValueFactory<joueur,String>("nom_joueur"));
+        agej.setCellValueFactory(new PropertyValueFactory<joueur,Integer>("age_joueur"));
+                nmr.setCellValueFactory(new PropertyValueFactory<joueur,Integer>("num_joueur"));
+        posj.setCellValueFactory(new PropertyValueFactory<joueur,String>("Position_joueur"));
+          ServiceJoueur service = new ServiceJoueur();
+        List<joueur> joueurs = service.getAll();
+            ObservableList<joueur> obbjoueurs =FXCollections.observableArrayList(joueurs);
+        joueurrs.setItems(obbjoueurs);
+    }
 
     @FXML
     private void joadd(ActionEvent event) {
@@ -106,7 +122,8 @@ SpinnerValueFactory<Integer> v = new SpinnerValueFactory.IntegerSpinnerValueFact
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("AJOUT AVEC SUCCES");
-            alert.showAndWait();}
+            alert.showAndWait();
+                 update();}
         
     }
 
@@ -125,41 +142,7 @@ joueurrs.setItems(obbjoueurs);
         
     }
 
-    @FXML
-    private void Modijoue(ActionEvent event) {
-         try {
-            Parent root =  FXMLLoader.load(getClass().getResource("modijoueur.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("MODIFIER JOUEUR");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(AjoueurController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    @FXML
-    private void Suppjoue(ActionEvent event) {
-         try {
-            Parent root =  FXMLLoader.load(getClass().getResource("suppjou.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("SUPPRIMER JOUEUR");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(AjoueurController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+   
 
     @FXML
     private void jouaddt(MouseEvent event) {
@@ -168,6 +151,23 @@ joueurrs.setItems(obbjoueurs);
        joueurage.getValueFactory().setValue(clickedjoueur.getAge_joueur());
        joueurnum.getValueFactory().setValue(clickedjoueur.getNum_joueur());   
        joueurposition.setValue(clickedjoueur.getPosition_joueur());
+    }
+
+    @FXML
+    private void JOUEURACCEUIL(ActionEvent event) {
+          try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("GestionJoueur.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
     }
     
 }

@@ -6,6 +6,7 @@
 package edu.esprit.pi.services;
 import java.util.List;
 import edu.esprit.pi.entities.Reclamation;
+import edu.esprit.pi.entities.utilisateur;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import edu.esprit.pi.tools. DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 ;
 /**
  *
@@ -24,35 +26,31 @@ public ServiceReclamation(){
     this.cnx= DataSource.getInstance().getConnection();
 }
 
-
-
     @Override
-  public void ajouter(Reclamation t) {
-try {
-    String selectQuery = "SELECT num,email,id_user FROM utilisateur WHERE cin = ?";
-    PreparedStatement selectStmt = cnx.prepareStatement(selectQuery);
-    selectStmt.setString(1, t.getCin());
-
-    ResultSet resultSet = selectStmt.executeQuery();
-
-    if (resultSet.next()) {
-        String insertQuery = "INSERT INTO recl (numero,email,id_utilisateur,type,description,etat) " +
-                            "VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
-        insertStmt.setString(1, resultSet.getString("num"));
-        insertStmt.setString(2, resultSet.getString("email"));
-        insertStmt.setInt(3, resultSet.getInt("id_user"));
-        insertStmt.setString(4, t.getType());
-        insertStmt.setString(5, t.getDescription());
-        insertStmt.setString(6, "en attente");
-        insertStmt.executeUpdate();
-        System.out.println("Donnée ajoutée avec succès!");
-    } else {
-        System.out.println("Cin n'est pas trouvée");
+ public void ajouter(Reclamation t) {
+    try {
+        String selectQuery = "SELECT num, email FROM utilisateur WHERE id_user = ?";
+        PreparedStatement selectStmt = cnx.prepareStatement(selectQuery);
+        selectStmt.setInt(1, utilisateur.current_user.getId_user());
+        ResultSet resultSet = selectStmt.executeQuery();
+        if (resultSet.next()) {
+            String insertQuery = "INSERT INTO recl (numero, email, id_utilisateur, type, description, etat) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement insertStmt = cnx.prepareStatement(insertQuery);
+            insertStmt.setString(1, resultSet.getString("num"));
+            insertStmt.setString(2, resultSet.getString("email"));
+            insertStmt.setInt(3, utilisateur.current_user.getId_user());
+            insertStmt.setString(4, t.getType());
+            insertStmt.setString(5, t.getDescription());
+            insertStmt.setString(6, "en attente");
+            insertStmt.executeUpdate();
+            System.out.println("Donnée ajoutée avec succès!");
+        } else {
+            System.out.println("L'utilisateur n'a pas été trouvé");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
-} catch (SQLException ex) {
-    System.out.println(ex.getMessage());
-}
 }
     @Override
   public void modifier(Reclamation t) {
@@ -78,7 +76,6 @@ try {
     }
 }
     
-
     @Override
 public Reclamation getOne(int id) {
     try {
@@ -114,14 +111,18 @@ public Reclamation getOne(int id) {
         ResultSet rs=  stm.executeQuery(req);
     while (rs.next()){
         Reclamation r = new Reclamation();
-        r.setId_reclamation(rs.getInt(1));
-        r.setId_utilisateur(rs.getInt(2));
+<<<<<<< HEAD
         r.setNum(rs.getString(3));
         r.setEmail(rs.getString(4));
+=======
+        r.setId_reclamation(rs.getInt(1));
+        r.setEmail(rs.getString(3));
+        r.setNum(rs.getString(8));
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
         r.setType(rs.getString(5));
         r.setDescription(rs.getString(6));
         r.setEtat(rs.getString(7));
-          r.setDate(rs.getString(8));
+          r.setDate(rs.getString(4));
         reclamation.add(r);
     }
         
@@ -134,18 +135,17 @@ public Reclamation getOne(int id) {
     return reclamation;
     }
       
-    public List<Reclamation> afficher(String cin) {
-    ArrayList<Reclamation> reclamation = new ArrayList<>();
+    public List<Reclamation> afficher() {
+     ArrayList<Reclamation> reclamation = new ArrayList<>();
     try {
-     
-        String req = "SELECT * FROM recl WHERE id_utilisateur = (SELECT id_user FROM utilisateur WHERE cin = ?)";
+        String req = "SELECT * FROM recl WHERE id_utilisateur = ?";
         PreparedStatement preparedStatement = cnx.prepareStatement(req);
-        preparedStatement.setString(1, cin);
+        preparedStatement.setInt(1, utilisateur.current_user.getId_user());
         ResultSet rs = preparedStatement.executeQuery();
         
         while (rs.next()) {
             Reclamation r = new Reclamation();
-            r.setId_reclamation(rs.getInt("id_reclamation"));
+             r.setId_reclamation(rs.getInt(1));
             r.setNum(rs.getString("numero"));
             r.setEmail(rs.getString("email"));
             r.setType(rs.getString("type"));
@@ -159,7 +159,62 @@ public Reclamation getOne(int id) {
     }
 
     return reclamation;
-}}
+}
+   public List<Reclamation> trierReclamationsParEtat() {
+        List<Reclamation> reclamations = getAll();
+        Collections.sort(reclamations, (r1, r2) -> {
+            String etat1 = r1.getEtat();
+            String etat2 = r2.getEtat();
+            if (etat1.equals("en attente")) {
+                if (etat2.equals("en attente")) {
+                    return 0;
+                } else if (etat2.equals("en cours")) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            } else if (etat1.equals("en cours")) {
+                if (etat2.equals("en attente")) {
+                    return 1;
+                } else if (etat2.equals("en cours")) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } else {
+                if (etat2.equals("en attente")) {
+                    return -1;
+                } else if (etat2.equals("en cours")) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        return reclamations;
+    }
+
+public boolean checkUser(Reclamation user, String lowerCaseFilter) {
+     
+
+     Reclamation r = new Reclamation();
+        if (String.valueOf(r.getEmail()).toLowerCase().contains(lowerCaseFilter)) {
+            return true;
+        } else  if (String.valueOf(r.getNum()).toLowerCase().contains(lowerCaseFilter)) {
+            return true;
+        } else  if (String.valueOf(r.getDescription()).toLowerCase().contains(lowerCaseFilter)) {
+            return true;
+        } else  if (String.valueOf(r.getEtat()).toLowerCase().contains(lowerCaseFilter)) {
+            return true;
+      
+        } else  if (String.valueOf(r.getType()).toLowerCase().contains(lowerCaseFilter)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
       
    
     

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/entities/utilisateur.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/services/serviceUser.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/ReponseAdminController.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/HistoriquereclController.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/LoginController.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/login.fxml</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/workshopjdbc/WorkshopJDBC.java</file>
+            <file>file:/C:/Users/majdiabdelkrim/Desktop/Takwira/Takwira/src/edu/esprit/pi/gui/AcceuilController.java</file>
+=======
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/GestionEquipeController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/GestionJoueurController.java</file>
+            <file>file:/C:/Users/aziz/OneDrive/Bureau/pi/Takwira/src/edu/esprit/pi/gui/AcceuilController.java</file>
+>>>>>>> 80e8b0478f25e6c5ab854ad330d1b6fd5526507d
+        </group>
+    </open-files>
+</project-private>

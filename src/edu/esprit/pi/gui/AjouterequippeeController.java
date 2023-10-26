@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package edu.esprit.pi.gui;
-
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
+import edu.esprit.pi.services.ServiceJoueur;
+import edu.esprit.pi.services.ServiceEquipe;
 import java.io.IOException;
+//package tn.edu.esprit.gui;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -29,9 +35,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import tn.edu.esprit.entities.equipe;
-import tn.edu.esprit.entities.joueur;
-import tn.edu.esprit.services.ServiceEquipe;
+//import tn.edu.esprit.entities.equipe;
+//import tn.edu.esprit.services.ServiceEquipe;
+
 
 /**
  * FXML Controller class
@@ -75,23 +81,18 @@ SpinnerValueFactory<Integer> v = new SpinnerValueFactory.IntegerSpinnerValueFact
    v.setValue(1);
   nombrejequipppe.setValueFactory(v);    }    
 
-    @FXML
-    private void modifierreqa(ActionEvent event) {
-          try {
-            Parent root =  FXMLLoader.load(getClass().getResource("modifierequipe.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("Modifier equipe");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(AjoueurController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+   
+     public void  update ()
+    {
+                   obbequipe.clear();
+        nomequipea.setCellValueFactory(new PropertyValueFactory<equipe,String>("nom_equipe"));
+        nbjoueureqa.setCellValueFactory(new PropertyValueFactory<equipe,Integer>("nbjoueur_equipe"));
+        couleurmaillota.setCellValueFactory(new PropertyValueFactory<equipe,String>("couleurmaillot"));
+        ServiceEquipe service = new ServiceEquipe();
+        List<equipe> equipes = service.getAll();
+        ObservableList<equipe> obbequipe =FXCollections.observableArrayList(equipes);
+        equipesaa.setItems(obbequipe);
     }
-    
 
     @FXML
     private void ajoutereqqa(ActionEvent event) {
@@ -111,25 +112,10 @@ SpinnerValueFactory<Integer> v = new SpinnerValueFactory.IntegerSpinnerValueFact
               Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("AJOUT AVEC SUCCES");
-            alert.showAndWait();}
+            alert.showAndWait();
+                 update(); }
     }
 
-    @FXML
-    private void supprimereqqqa(ActionEvent event) {
-          try {
-            Parent root =  FXMLLoader.load(getClass().getResource("suppeq.fxml"));
-
-            Stage stage = new Stage();
-            stage.setTitle("Supprimer equipe");
-            stage.setScene(new Scene(root));
-            
-            stage.show();
-            
-           
-        } catch (IOException ex) {
-            Logger.getLogger(AjoueurController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @FXML
     private void mettereajourtable(ActionEvent event) {
@@ -155,5 +141,36 @@ equipesaa.setItems(obbequipe);
        nomequipppe.setText(String.valueOf(clickedequipe.getNom_equipe()));
        nombrejequipppe.getValueFactory().setValue(clickedequipe.getNbjoueur_equipe());
     }
-    
+
+    @FXML
+    private void imprimer_tableau(ActionEvent event) {
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if(job != null ) 
+        {        boolean success = job.printPage(equipesaa) ;
+        if (success) { job.endJob();
+        }
 }
+}
+
+    @FXML
+    private void RETOURACC(ActionEvent event) {
+        
+         try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("GestionEquipe.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
+    }
+   
+}
+
+

@@ -6,6 +6,7 @@
 package edu.esprit.pi.entities;
 
 import java.sql.Date;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -17,6 +18,10 @@ public class utilisateur {
     public static utilisateur edit_user;
 
     public static void add(utilisateur u) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void setItems(ObservableList<utilisateur> dataList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -147,5 +152,4 @@ public class utilisateur {
     public static void setCurrent_user(utilisateur current_user) {
         utilisateur.current_user = current_user;
     }
-
 }

@@ -4,10 +4,21 @@
  * and open the template in the editor.
  */
 package edu.esprit.pi.gui;
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
+import edu.esprit.pi.services.ServiceJoueur;
+import edu.esprit.pi.services.ServiceEquipe;
+//package tn.edu.esprit.gui;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +33,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import tn.edu.esprit.entities.joueur;
-import tn.edu.esprit.services.ServiceJoueur;
+//import tn.edu.esprit.entities.joueur;
+//import tn.edu.esprit.services.ServiceJoueur;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -50,10 +68,14 @@ public class ModijoueurController implements Initializable {
     private TableColumn<joueur, String> posj;
     @FXML
     private Spinner<Integer> spnumero;
+    @FXML
+    private TextField textrech;
+    
 ObservableList<String> list = FXCollections.observableArrayList("","gardien","defenseur","milieu", "attaquant");
                 ServiceJoueur service = new ServiceJoueur();
         List<joueur> joueurs = service.getAll();
             ObservableList<joueur> obbjoueurs =FXCollections.observableArrayList(joueurs);
+  
     /**
      * Initializes the controller class.
      */
@@ -65,15 +87,37 @@ ObservableList<String> list = FXCollections.observableArrayList("","gardien","de
                                             posj.setCellValueFactory(new PropertyValueFactory<joueur,String>("Position_joueur"));
                                                     ServiceJoueur service = new ServiceJoueur();
                                                     SpinnerValueFactory<Integer> v = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100);
-                joutable.setItems(obbjoueurs);
+                joutable.setItems(obbjoueurs); 
+    
                 compos.setItems(list); 
    v.setValue(1);
   spage.setValueFactory(v);
-  SpinnerValueFactory<Integer> j = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100);
+  SpinnerValueFactory<Integer> j = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100);  
+    
+  spnumero.setValueFactory(j); 
+    
+FilteredList<joueur> filteredJoueurs = new FilteredList<>(obbjoueurs, p -> true);
 
-  spnumero.setValueFactory(j);
+        textrech.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredJoueurs.setPredicate(joueur -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                return joueur.getNom_joueur().toLowerCase().contains(lowerCaseFilter) || joueur.getPosition_joueur().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        SortedList<joueur> sortedJoueurs = new SortedList<>(filteredJoueurs);
+
+        sortedJoueurs.comparatorProperty().bind(joutable.comparatorProperty());
+        joutable.setItems(sortedJoueurs);
         
-    }    
+    }
+    
+
 
     @FXML
     private void modj(ActionEvent event) {
@@ -85,11 +129,12 @@ if (selectedjoueur != null ) {
     selectedjoueur.setNum_joueur(spnumero.getValue());
     selectedjoueur.setPosition_joueur(compos.getValue());
     jo.modifier(selectedjoueur);
-    joutable.getItems().remove(selectedjoueur);
-     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
-            alert.setContentText("MODIFIER AVEC SUCCES");
-            alert.showAndWait();}
+            alert.setContentText("AJOUT AVEC SUCCES");
+            alert.showAndWait();
+    joutable.getItems().remove(selectedjoueur);
+    }
  else {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Aucune sélection");
@@ -120,7 +165,59 @@ joutable.setItems(obbjoueurs);
         compos.setValue(clickedjoueur.getPosition_joueur());
        extnom.setText(String.valueOf(clickedjoueur.getNom_joueur()));
        spage.getValueFactory().setValue(clickedjoueur.getAge_joueur());
-       spnumero.getValueFactory().setValue(clickedjoueur.getNum_joueur());        
+       spnumero.getValueFactory().setValue(clickedjoueur.getNum_joueur());      
+      
     }
+
+   @FXML
+private void savetablee(ActionEvent event) {
+   FileChooser fileChooser = new FileChooser();
+fileChooser.setTitle("Enregistrer le fichier");
+
+// Définissez un filtre d'extension si nécessaire
+FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
+fileChooser.getExtensionFilters().add(extFilter);
+
+// Affichez le FileChooser et attendez que l'utilisateur sélectionne un fichier
+Stage primaryStage = new Stage(); // Vous devez avoir une instance de Stage pour afficher le FileChooser
+File file = fileChooser.showSaveDialog(primaryStage);
+
+if (file != null) { // Vérifiez si l'utilisateur a sélectionné un fichier
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        for (joueur joueur : obbjoueurs) {
+            String ligne = "Nom Joueur : " + joueur.getNom_joueur() + ", Numéro Joueur : " + joueur.getNum_joueur() + ", Age Joueur : " + joueur.getAge_joueur() + ", Position Joueur : " + joueur.getPosition_joueur() + "\n";
+            writer.write(ligne);
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Données enregistrées avec succès.");
+        alert.showAndWait();
+    } catch (IOException e) {
+        e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText("Erreur lors de l'enregistrement des données.");
+        alert.showAndWait();
+    }
+}
+}
+
+    @FXML
+    private void RETOURACC(ActionEvent event) {
+          try {
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("GestionJoueur.fxml"));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("sign Up");
+                        stage.setScene(new Scene(root));
+
+                        stage.show();
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+    }
+
     
 }

@@ -5,10 +5,17 @@
  */
 package edu.esprit.pi.gui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import edu.esprit.pi.entities.Reclamation;
 import edu.esprit.pi.services.ServiceReclamation;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,13 +27,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import edu.esprit.pi.gui.ReclamationajController;
-import javafx.scene.control.Alert;
+
 
 /**
  * FXML Controller class
@@ -35,35 +45,31 @@ import javafx.scene.control.Alert;
  */
 public class HistoriqueuserController implements Initializable {
 
-   
-    private TableColumn<Reclamation, String> typehra;
-    @FXML
-    private TableColumn<Reclamation, String> numhra;
-    @FXML
-    private TableColumn<Reclamation, String> emailhra;
-    @FXML
-    private TableColumn<Reclamation, String> deschra;
     @FXML
     private TextField textdehra;
     @FXML
     private TextField txttyhra;
     @FXML
+    private TableView<Reclamation  > tableuserrec;
+    @FXML
+    private TableColumn<Reclamation,String> numhra;
+    @FXML
+    private TableColumn<Reclamation,String> emailhra;
+    @FXML
+    private TableColumn<Reclamation,String> etathru;
+    @FXML
+    private TableColumn<Reclamation,String> hra;
+    @FXML
+    private TableColumn<Reclamation,String> deschra;
+    @FXML
+    private TableColumn<Reclamation,String> datehru;
+    @FXML
     private TextField txtidhra;
-    @FXML
-    private TableView<Reclamation> tableuserrec;
-    @FXML
-    private TableColumn<Reclamation, String> etathru;
-    @FXML
-    private TableColumn<Reclamation, String> hra;
-    @FXML
-    private TableColumn<Reclamation, String> datehru;
-    @FXML
-    private TextField txtcin;
-public  void getCinnn(String cin){
 
-    this.txtcin.setText(cin);
-            }
-int index = -1;
+    int index = -1;
+    @FXML
+    private AnchorPane iddd;
+
     /**
      * Initializes the controller class.
      */
@@ -71,8 +77,7 @@ int index = -1;
 
 
     public void initialize(URL url, ResourceBundle rb) {
-     
-      
+
        numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
       emailhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
      deschra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description")); 
@@ -80,17 +85,12 @@ int index = -1;
      hra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
      datehru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("date"));
     ServiceReclamation service = new ServiceReclamation();
-    List<Reclamation>  rec = service.afficher(txtcin.getText());   
+    List<Reclamation>  rec = service.afficher();   
      
         ObservableList<Reclamation> observableReclamation = FXCollections.observableArrayList(rec);
-        tableuserrec.setItems(observableReclamation);
-     
-     
-  
-     
+        tableuserrec.setItems(observableReclamation); 
    }   
     
-   
     @FXML  
     private void Select(javafx.scene.input.MouseEvent event) {
          index = tableuserrec.getSelectionModel().getSelectedIndex();
@@ -103,44 +103,46 @@ int index = -1;
     }
 
     @FXML
-    private void supphra(ActionEvent event) {
-        if(tableuserrec.getSelectionModel().getSelectedItem()!=null){ 
-        int id=tableuserrec.getSelectionModel().getSelectedItem().getId_reclamation();
-        ServiceReclamation service = new ServiceReclamation();
-        service.supprimer(id);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Reclamation supprimer avec succés!");        
-        alert.show();
-        tableuserrec.refresh();}
-       else {
+    
+         private void supphra(ActionEvent event) {
+    ServiceReclamation service = new ServiceReclamation();
+    Reclamation selectedReclamation = tableuserrec.getSelectionModel().getSelectedItem();
+    int selectedIndex = tableuserrec.getSelectionModel().getSelectedIndex();
+
+    if (selectedReclamation != null) {
+        int selectedID = selectedReclamation.getId_reclamation();
+        System.out.println(selectedID);
+
+        service.supprimer(selectedID); // You don't need to create a new ServiceReclamation instance
+
+        tableuserrec.getItems().remove(selectedIndex);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
-        alert.setContentText("Veuillez selectionnée!");        
-        alert.show();   
-       }     
-        
+        alert.setContentText("SUPPRIMÉ AVEC SUCCÈS");
+        alert.showAndWait();
+    } else {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Aucune sélection");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez sélectionner une ligne à supprimer.");
+        alert.showAndWait();
     }
+}
 
     @FXML
-    private void modihra(ActionEvent event) {
-          
+    private void modihra(ActionEvent event) {         
             ServiceReclamation service =new ServiceReclamation();
         Reclamation selectedReclamation = tableuserrec.getSelectionModel().getSelectedItem();
     if (selectedReclamation != null) {
          selectedReclamation.setDescription(textdehra.getText());
-        selectedReclamation.setType(txttyhra.getText());
-       
+        selectedReclamation.setType(txttyhra.getText());   
         if(txttyhra.getText().isEmpty()||textdehra.getText().isEmpty()){
              Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir les champs!");        
         alert.show();
-       
-            
         }
         else{
              service.modifier(selectedReclamation);
@@ -158,14 +160,12 @@ int index = -1;
         alert.setHeaderText(null);
         alert.setContentText("Veuilez selectionnée!");        
         alert.show();   
-                
-    
-    }}
+               
+    }
+    }
 
-    @FXML
     private void Rechercher(ActionEvent event) {
-          
-     typehra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
+   
        numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
       emailhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
      deschra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description")); 
@@ -185,56 +185,44 @@ int index = -1;
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez remplir  champs de id!");        
-        alert.show();
-         
-     }
+        alert.show();         
+    }
     }
     
 
     @FXML
     private void Tri(ActionEvent event) {
+         ServiceReclamation sp = new ServiceReclamation();
+    List<Reclamation> Liste_rec = sp.trierReclamationsParEtat();
+    ObservableList<Reclamation> obs = FXCollections.observableArrayList(Liste_rec);
+    tableuserrec.setItems(obs);
+
     }
 
     @FXML
     private void Reponseuser(ActionEvent event) {  
-                 try {
-              String cin=txtcin.getText();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HistoriquerepUser.fxml"));
-        Parent root =loader.load();
-        HistoriquerepUserController dc= loader.getController();
-        dc.getCinnn(cin);
-        txtcin.getScene().setRoot(root);
+         try {
+        Parent root = FXMLLoader.load(getClass().getResource("HistoriquerepUser.fxml"));
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Historique des Repo");
+        currentStage.show();
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
-    }        
+    }                   
     }
-    
-
-    @FXML
-    private void Mettreaj(ActionEvent event) {
-      
-       numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
+    public void msaj(){
+        numhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("num"));
       emailhra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("email"));
      deschra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("description")); 
      etathru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("etat"));
      hra.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("type"));
-     datehru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("date"));
-     if(txtcin.getText().isEmpty()){
-     Alert alert = new Alert(Alert.AlertType.INFORMATION.WARNING);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Veuillez remplir  champs de cin!");        
-        alert.show();}
-     else{
+     datehru.setCellValueFactory(new PropertyValueFactory <Reclamation,String>("date")); 
     ServiceReclamation service = new ServiceReclamation();
-    List<Reclamation>  rec = service.afficher(txtcin.getText());   
-     
-        ObservableList<Reclamation> observableReclamation = FXCollections.observableArrayList(rec);
-        tableuserrec.setItems(observableReclamation);
-     
+    List<Reclamation>  rec = service.afficher();   
+    ObservableList<Reclamation> observableReclamation = FXCollections.observableArrayList(rec);
+    tableuserrec.setItems(observableReclamation);
      }
-    }
-
     @FXML
     private void Retour(ActionEvent event) {
          try {
@@ -247,6 +235,65 @@ int index = -1;
         System.out.println(ex.getMessage());
     }         
     }
+    
+    @FXML
+    private void Pdff(ActionEvent event) {
+                 try {
+            OutputStream file = new FileOutputStream(new File("C:\\Users\\aziz\\OneDrive\\Bureau\\pi\\reclamationuser.pdf"));
+         Document document = new Document();
+            PdfWriter.getInstance(document, file);
+            document.open();
+            ServiceReclamation sm = new ServiceReclamation();
+            Reclamation rec = tableuserrec.getSelectionModel().getSelectedItem();
+            document.add(new Paragraph("************************  Reclamation ************************\n\n\n\n\n\n\n"));
+            document.add(new Paragraph(" ___________________________________________________________________________\n"));
+             document.add(new Paragraph(" Type :  " + rec.getType() + "  \n"));
+            document.add(new Paragraph(" Etat :  " + rec.getEtat() + "  \n"));
+            document.add(new Paragraph(" Email :  " + rec.getEmail() + "  \n"));
+            document.add(new Paragraph(" Numero :  " + rec.getNum() + "  \n"));
+              document.add(new Paragraph(" Description  :  " + rec.getDescription() + "  \n"));
+            document.add(new Paragraph(" Date :  " + rec.getDate()+ "  \n"));
+            document.add(new Paragraph(" _______________________________________________________________________")); 
+            document.close();
+            file.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
+      
+   private boolean checkUser(Reclamation r, String lowerCaseFilter) {
+    // Check if any of the fields contain the filter string
+    return String.valueOf(r.getEmail()).toLowerCase().contains(lowerCaseFilter) ||
+           String.valueOf(r.getNum()).toLowerCase().contains(lowerCaseFilter) ||
+           String.valueOf(r.getDescription()).toLowerCase().contains(lowerCaseFilter) ||
+           String.valueOf(r.getEtat()).toLowerCase().contains(lowerCaseFilter) ||
+           String.valueOf(r.getType()).toLowerCase().contains(lowerCaseFilter);}
+
+
+    @FXML
+    private void Selectttee(KeyEvent event) { 
+ ServiceReclamation serviceReclamation = new ServiceReclamation();
+    String lowerCaseFilter = txtidhra.getText().toLowerCase();
+
+    if (lowerCaseFilter.isEmpty()) {
+        msaj();
+        return;
+    }
+
+    List<Reclamation> listReclamations = serviceReclamation.getAll();
+    List<Reclamation> filteredList = new ArrayList<>();
+    for (Reclamation reclamation : listReclamations) {
+        if (this.checkUser(reclamation, lowerCaseFilter)) {
+            filteredList.add(reclamation);
+        }
+    }
+
+    // Assuming tablerec is a JavaFX TableView
+    ObservableList<Reclamation> items = FXCollections.observableArrayList(filteredList);
+    tableuserrec.setItems(items);
+    }
+
     }
     
 

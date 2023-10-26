@@ -89,5 +89,38 @@ public class FaresController implements Initializable {
         }
         
     }
+
+    @FXML
+    private void Rechercher(ActionEvent event) {
+        try {
+            Parent root =  FXMLLoader.load(getClass().getResource("RechercherMoptions.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("Option");
+            stage.setScene(new Scene(root));
+            
+            stage.show();
+            
+           
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void Retour(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("Gestion");
+            stage.setScene(new Scene(root));
+
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

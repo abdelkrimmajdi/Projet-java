@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package edu.esprit.pi.services;
+//package tn.edu.esprit.services;
+import edu.esprit.pi.entities.equipe;
+import edu.esprit.pi.entities.joueur;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import edu.esprit.pi.entities.equipe;
+//import tn.edu.esprit.entities.equipe;
 import edu.esprit.pi.tools.DataSource;
 
 /**

@@ -31,17 +31,7 @@ public class Tournoi {
         this.date_tournoi = date_tournoi;
     }
 
-    public Tournoi(int id_tournoi, String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
-        this.id_tournoi = id_tournoi;
-        this.nom_tournoi = nom_tournoi;
-        this.equipes = equipes;
-        this.adresse = adresse;
-        this.nbr_equipe = nbr_equipe;
-        this.date_tournoi = date_tournoi;
-    }
-
-    public Tournoi(int id_tournoi, int id_terrain, String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
-        this.id_tournoi = id_tournoi;
+    public Tournoi(int id_terrain, String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi) {
         this.id_terrain = id_terrain;
         this.nom_tournoi = nom_tournoi;
         this.equipes = equipes;
@@ -50,6 +40,24 @@ public class Tournoi {
         this.date_tournoi = date_tournoi;
     }
 
+    public Tournoi(String nom_tournoi, String equipes, String adresse, int nbr_equipe, Date date_tournoi,int id_tournoi) {
+        this.id_tournoi = id_tournoi;
+        this.nom_tournoi = nom_tournoi;
+        this.equipes = equipes;
+        this.adresse = adresse;
+        this.nbr_equipe = nbr_equipe;
+        this.date_tournoi = date_tournoi;
+    }
+
+    public Tournoi(String nom_tournoi, String equipes, String adresse, Date date_tournoi) {
+        this.nom_tournoi = nom_tournoi;
+        this.equipes = equipes;
+        this.adresse = adresse;
+        this.date_tournoi = date_tournoi;
+    }
+
+    
+    
     public String getNom_tournoi() {
         return nom_tournoi;
     }

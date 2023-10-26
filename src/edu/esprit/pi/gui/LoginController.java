@@ -119,7 +119,8 @@ public class LoginController implements Initializable {
                 utilisateur.setCurrent_user(u);
                 if (utilisateur.current_user.getRole() == 1) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+                        
+                        Parent root = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
 
                         Stage stage = new Stage();
                         stage.setTitle("sign Up");

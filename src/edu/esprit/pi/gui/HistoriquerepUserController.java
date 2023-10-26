@@ -42,14 +42,12 @@ public class HistoriquerepUserController implements Initializable {
     private TableColumn<Reponse,String> etat;
     @FXML
     private TableColumn<Reponse,String> daterep;
-    @FXML
     private TextField txtrepc;
     @FXML
     private TextField txtcin;
-    public  void getCinnn(String cin){
+   
 
-    this.txtrepc.setText(cin);
-            }
+  
 
     /**
      * Initializes the controller class.
@@ -60,7 +58,7 @@ public class HistoriquerepUserController implements Initializable {
   daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
     txtrep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse")); 
     ServiceReponse service = new ServiceReponse();
-    List<Reponse>  rec = service.afficher(txtrepc.getText());   
+    List<Reponse>  rec = service.afficher();   
         ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(rec);
         tablerecluser.setItems(observableReponse);          
     }       
@@ -81,7 +79,6 @@ public class HistoriquerepUserController implements Initializable {
     @FXML
     private void trirepuser(ActionEvent event) {
     }
-
     @FXML
     private void rechrepuser(ActionEvent event) {
   etat.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat"));
@@ -104,7 +101,6 @@ public class HistoriquerepUserController implements Initializable {
 
     @FXML
     private void majj(ActionEvent event) {
-   
   etat.setCellValueFactory(new PropertyValueFactory <Reponse,String>("etat"));
   daterep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("date_reponse"));
     txtrep.setCellValueFactory(new PropertyValueFactory <Reponse,String>("text_reponse"));
@@ -116,7 +112,7 @@ public class HistoriquerepUserController implements Initializable {
         alert.show();}
      else{
     ServiceReponse service = new ServiceReponse();
-    List<Reponse>  rec = service.afficher(txtrepc.getText());   
+    List<Reponse>  rec = service.afficher();   
      if (rec != null) {
         ObservableList<Reponse> observableReponse = FXCollections.observableArrayList(rec);
         tablerecluser.setItems(observableReponse);
